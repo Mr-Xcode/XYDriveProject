@@ -209,7 +209,7 @@
 //线路规划
 - (void)lineProject
 {
-    if (self.markersAnnotationArray && self.markersAnnotationArray.count >0) {
+    if (self.markersAnnotationArray && self.markersAnnotationArray.count >2) {
         NSMutableArray * array =[NSMutableArray array];
         for (MAPointAnnotation *pointAnnotation in self.markersAnnotationArray) {
             AMapGeoPoint * point =[AMapGeoPoint locationWithLatitude:pointAnnotation.coordinate.latitude longitude:pointAnnotation.coordinate.longitude];
