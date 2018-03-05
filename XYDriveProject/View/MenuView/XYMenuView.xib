@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="XYMenuView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bc.png" translatesAutoresizingMaskIntoConstraints="NO" id="iDl-Lj-hS9">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHr-IZ-ODI" userLabel="topView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户：逍遥子" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTv-VE-24u">
+                            <rect key="frame" x="15" y="25" width="92" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号：shuhuan@163.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XS8-dz-0P4">
+                            <rect key="frame" x="15" y="51" width="176.5" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="印记：去过14个城市的168个景点，行驶了2018km，逍遥自驾排名第2名" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPh-9f-Py1">
+                            <rect key="frame" x="15" y="77" width="345" height="33.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="归属：草原派" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VnA-8f-fLz">
+                            <rect key="frame" x="15" y="119" width="345" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="BPh-9f-Py1" secondAttribute="trailing" constant="15" id="2ts-aa-Bg2"/>
+                        <constraint firstItem="VnA-8f-fLz" firstAttribute="top" secondItem="BPh-9f-Py1" secondAttribute="bottom" constant="8" id="7Gj-Qr-xfw"/>
+                        <constraint firstItem="VnA-8f-fLz" firstAttribute="trailing" secondItem="BPh-9f-Py1" secondAttribute="trailing" id="DIP-eN-BAu"/>
+                        <constraint firstAttribute="height" constant="128" id="Jr8-w0-O63"/>
+                        <constraint firstItem="XS8-dz-0P4" firstAttribute="leading" secondItem="BTv-VE-24u" secondAttribute="leading" id="RWs-fU-iHn"/>
+                        <constraint firstItem="XS8-dz-0P4" firstAttribute="top" secondItem="BTv-VE-24u" secondAttribute="bottom" constant="8" id="dwk-5u-0I5"/>
+                        <constraint firstItem="BTv-VE-24u" firstAttribute="leading" secondItem="wHr-IZ-ODI" secondAttribute="leading" constant="15" id="fWy-li-lR3"/>
+                        <constraint firstItem="VnA-8f-fLz" firstAttribute="leading" secondItem="XS8-dz-0P4" secondAttribute="leading" id="gs0-tA-weU"/>
+                        <constraint firstItem="BTv-VE-24u" firstAttribute="top" secondItem="wHr-IZ-ODI" secondAttribute="top" constant="25" id="kC7-42-aLk"/>
+                        <constraint firstItem="BPh-9f-Py1" firstAttribute="top" secondItem="XS8-dz-0P4" secondAttribute="bottom" constant="8" id="nv1-tV-fqT"/>
+                        <constraint firstItem="BPh-9f-Py1" firstAttribute="leading" secondItem="XS8-dz-0P4" secondAttribute="leading" id="ohU-AL-GRE"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7m-aj-Z6I">
+                    <rect key="frame" x="0.0" y="133" width="375" height="534"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im1-bC-4nw">
+                            <rect key="frame" x="15" y="440" width="345" height="44"/>
+                            <color key="backgroundColor" red="1" green="0.33725490200000002" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="egp-db-lpP"/>
+                            </constraints>
+                            <state key="normal" title="退出">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="logOutButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="B84-tf-AJu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="im1-bC-4nw" secondAttribute="trailing" constant="15" id="cAJ-bo-fy8"/>
+                        <constraint firstAttribute="bottom" secondItem="im1-bC-4nw" secondAttribute="bottom" constant="50" id="hPV-fS-k4G"/>
+                        <constraint firstItem="im1-bC-4nw" firstAttribute="leading" secondItem="O7m-aj-Z6I" secondAttribute="leading" constant="15" id="nIE-P2-GZq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="O7m-aj-Z6I" secondAttribute="trailing" id="64c-Qk-sVg"/>
+                <constraint firstAttribute="trailing" secondItem="wHr-IZ-ODI" secondAttribute="trailing" id="LTW-H9-POb"/>
+                <constraint firstItem="wHr-IZ-ODI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LnO-z6-AHg"/>
+                <constraint firstItem="O7m-aj-Z6I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NHH-bb-m0x"/>
+                <constraint firstAttribute="bottom" secondItem="iDl-Lj-hS9" secondAttribute="bottom" id="V3h-GI-Iab"/>
+                <constraint firstItem="wHr-IZ-ODI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VUI-9q-hVF"/>
+                <constraint firstAttribute="bottom" secondItem="O7m-aj-Z6I" secondAttribute="bottom" id="Ym0-Tw-IOY"/>
+                <constraint firstAttribute="trailing" secondItem="iDl-Lj-hS9" secondAttribute="trailing" id="ZSS-Bv-CDj"/>
+                <constraint firstItem="iDl-Lj-hS9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bZI-t1-EnH"/>
+                <constraint firstItem="iDl-Lj-hS9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hwT-2C-Ou9"/>
+                <constraint firstItem="O7m-aj-Z6I" firstAttribute="top" secondItem="wHr-IZ-ODI" secondAttribute="bottom" constant="5" id="mkg-Qt-AOc"/>
+            </constraints>
+            <connections>
+                <outlet property="logOutButton" destination="im1-bC-4nw" id="c97-1O-ZUz"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="bc.png" width="750" height="1334"/>
+    </resources>
+</document>
