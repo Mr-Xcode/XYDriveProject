@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    //刚刚添加了git管理，哈哈
+    self.view.backgroundColor =[UIColor redColor];
 }
 
 
