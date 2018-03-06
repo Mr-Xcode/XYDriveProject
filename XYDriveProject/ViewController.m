@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     //刚刚添加了git管理，哈哈
+    //我试试能不能提交
 }
 
 

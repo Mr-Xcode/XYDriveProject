@@ -302,7 +302,6 @@
 				234692EC2022E488007DE6F4 /* Framework */,
 				234692E12022E2C4007DE6F4 /* Macros */,
 				234692DF2022E2C3007DE6F4 /* Model */,
-				234692E02022E2C3007DE6F4 /* Resource */,
 				234692E32022E2C4007DE6F4 /* Utils */,
 				234692E22022E2C4007DE6F4 /* View */,
 				234692E52022E2C4007DE6F4 /* ViewController */,
@@ -344,15 +343,6 @@
 				23A36EFA202C3B7000F1C730 /* UserModel */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		234692E02022E2C3007DE6F4 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				2346930E2022FDD2007DE6F4 /* Pic */,
-				2346930D2022FDD2007DE6F4 /* profile */,
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		234692E12022E2C4007DE6F4 /* Macros */ = {
@@ -553,20 +543,6 @@
 				23A36E1020283E3900F1C730 /* Registe */,
 			);
 			path = XYLoginViewController;
-			sourceTree = "<group>";
-		};
-		2346930D2022FDD2007DE6F4 /* profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = profile;
-			sourceTree = "<group>";
-		};
-		2346930E2022FDD2007DE6F4 /* Pic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pic;
 			sourceTree = "<group>";
 		};
 		2346931220230588007DE6F4 /* Color */ = {
