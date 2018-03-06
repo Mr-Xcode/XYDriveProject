@@ -17,12 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-<<<<<<< HEAD
-    //刚刚添加了git管理，哈哈
-    //
-=======
-    //last ddd
->>>>>>> 43478a3ffb6e16b8ef5b9d7a21ade14f3e74f40e
+    //last sss
 }
 
 
