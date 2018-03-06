@@ -30,6 +30,7 @@
 		234693032022FAB7007DE6F4 /* XYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 234693012022FAB7007DE6F4 /* XYLoginViewController.xib */; };
 		234693172023059E007DE6F4 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 234693132023059E007DE6F4 /* UIColor+Extension.m */; };
 		234693182023059E007DE6F4 /* UIColor+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 234693152023059E007DE6F4 /* UIColor+helper.m */; };
+		2347CEEA204E21B70091DD09 /* testObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2347CEE9204E21B70091DD09 /* testObject.m */; };
 		238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238BB25120478FF50072F2C3 /* XYCoverView.m */; };
 		238BB25520479CC80072F2C3 /* icon_location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25320479CC80072F2C3 /* icon_location@3x.png */; };
 		238BB25620479CC80072F2C3 /* icon_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25420479CC80072F2C3 /* icon_location@2x.png */; };
@@ -133,6 +134,8 @@
 		234693192023067A007DE6F4 /* TextFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextFont.h; sourceTree = "<group>"; };
 		2346931A202306D9007DE6F4 /* Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		2346931B20230AC2007DE6F4 /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
+		2347CEE8204E21B70091DD09 /* testObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testObject.h; sourceTree = "<group>"; };
+		2347CEE9204E21B70091DD09 /* testObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testObject.m; sourceTree = "<group>"; };
 		238BB25020478FF50072F2C3 /* XYCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCoverView.h; sourceTree = "<group>"; };
 		238BB25120478FF50072F2C3 /* XYCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCoverView.m; sourceTree = "<group>"; };
 		238BB25320479CC80072F2C3 /* icon_location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_location@3x.png"; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 		234692EC2022E488007DE6F4 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				2347CEE4204E21990091DD09 /* test */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -574,6 +578,15 @@
 				234693152023059E007DE6F4 /* UIColor+helper.m */,
 			);
 			path = Color;
+			sourceTree = "<group>";
+		};
+		2347CEE4204E21990091DD09 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				2347CEE8204E21B70091DD09 /* testObject.h */,
+				2347CEE9204E21B70091DD09 /* testObject.m */,
+			);
+			path = test;
 			sourceTree = "<group>";
 		};
 		238BB24F20478FC40072F2C3 /* 透明背景 */ = {
@@ -1126,6 +1139,7 @@
 				234693022022FAB7007DE6F4 /* XYLoginViewController.m in Sources */,
 				23C0614B204CE69700F6153E /* XYCustomCalloutView.m in Sources */,
 				234692F72022E53A007DE6F4 /* XYBaseViewController.m in Sources */,
+				2347CEEA204E21B70091DD09 /* testObject.m in Sources */,
 				234693182023059E007DE6F4 /* UIColor+helper.m in Sources */,
 				23A36E422029888500F1C730 /* XYDateSlecteView.m in Sources */,
 				238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */,
