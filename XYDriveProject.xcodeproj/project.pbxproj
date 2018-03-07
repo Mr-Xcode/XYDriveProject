@@ -31,6 +31,11 @@
 		234693172023059E007DE6F4 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 234693132023059E007DE6F4 /* UIColor+Extension.m */; };
 		234693182023059E007DE6F4 /* UIColor+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 234693152023059E007DE6F4 /* UIColor+helper.m */; };
 		2347CEEA204E21B70091DD09 /* testObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2347CEE9204E21B70091DD09 /* testObject.m */; };
+		23500381204F77D500DC02EF /* SelectableOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2350037F204F77D400DC02EF /* SelectableOverlay.m */; };
+		23500383204F7DE000DC02EF /* trackDirection.png in Resources */ = {isa = PBXBuildFile; fileRef = 23500382204F7DE000DC02EF /* trackDirection.png */; };
+		23500393204FCA3700DC02EF /* RouteCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23500391204FCA3600DC02EF /* RouteCollectionViewCell.m */; };
+		23500396204FCB0E00DC02EF /* DriveNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23500395204FCB0D00DC02EF /* DriveNaviViewController.m */; };
+		2350039A204FCD3A00DC02EF /* MoreMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23500399204FCD3A00DC02EF /* MoreMenuView.m */; };
 		238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238BB25120478FF50072F2C3 /* XYCoverView.m */; };
 		238BB25520479CC80072F2C3 /* icon_location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25320479CC80072F2C3 /* icon_location@3x.png */; };
 		238BB25620479CC80072F2C3 /* icon_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25420479CC80072F2C3 /* icon_location@2x.png */; };
@@ -136,6 +141,15 @@
 		2346931B20230AC2007DE6F4 /* CommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacro.h; sourceTree = "<group>"; };
 		2347CEE8204E21B70091DD09 /* testObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testObject.h; sourceTree = "<group>"; };
 		2347CEE9204E21B70091DD09 /* testObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = testObject.m; sourceTree = "<group>"; };
+		2350037F204F77D400DC02EF /* SelectableOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectableOverlay.m; sourceTree = "<group>"; };
+		23500380204F77D400DC02EF /* SelectableOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectableOverlay.h; sourceTree = "<group>"; };
+		23500382204F7DE000DC02EF /* trackDirection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trackDirection.png; sourceTree = "<group>"; };
+		23500391204FCA3600DC02EF /* RouteCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteCollectionViewCell.m; sourceTree = "<group>"; };
+		23500392204FCA3700DC02EF /* RouteCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteCollectionViewCell.h; sourceTree = "<group>"; };
+		23500394204FCB0D00DC02EF /* DriveNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveNaviViewController.h; sourceTree = "<group>"; };
+		23500395204FCB0D00DC02EF /* DriveNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveNaviViewController.m; sourceTree = "<group>"; };
+		23500398204FCD3900DC02EF /* MoreMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreMenuView.h; sourceTree = "<group>"; };
+		23500399204FCD3A00DC02EF /* MoreMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreMenuView.m; sourceTree = "<group>"; };
 		238BB25020478FF50072F2C3 /* XYCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCoverView.h; sourceTree = "<group>"; };
 		238BB25120478FF50072F2C3 /* XYCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCoverView.m; sourceTree = "<group>"; };
 		238BB25320479CC80072F2C3 /* icon_location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_location@3x.png"; sourceTree = "<group>"; };
@@ -254,6 +268,8 @@
 		2322B8AE204B9C600095DA01 /* MAP */ = {
 			isa = PBXGroup;
 			children = (
+				23500397204FCD2D00DC02EF /* MoreMenuView */,
+				23500390204FCA1500DC02EF /* RouteCollectionViewCell */,
 				2322B8B5204B9D2B0095DA01 /* CommonUtility.h */,
 				2322B8B4204B9D2B0095DA01 /* CommonUtility.m */,
 				2322B8B2204B9D2B0095DA01 /* LineDashPolyline.h */,
@@ -268,6 +284,8 @@
 				2322B8B0204B9C910095DA01 /* SHMapSearchManager.m */,
 				2322B8C1204BA10C0095DA01 /* SHRoutePolylineRenderer.h */,
 				2322B8C2204BA10C0095DA01 /* SHRoutePolylineRenderer.m */,
+				23500380204F77D400DC02EF /* SelectableOverlay.h */,
+				2350037F204F77D400DC02EF /* SelectableOverlay.m */,
 			);
 			path = MAP;
 			sourceTree = "<group>";
@@ -377,7 +395,6 @@
 				23A36E0C202832D700F1C730 /* WriteLog */,
 				234692ED2022E4AD007DE6F4 /* Category */,
 				234692EF2022E4AE007DE6F4 /* Manager */,
-				234692F02022E4AE007DE6F4 /* Service */,
 				234692EE2022E4AD007DE6F4 /* Util */,
 			);
 			path = Utils;
@@ -491,13 +508,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		234692F02022E4AE007DE6F4 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		234692F12022E50B007DE6F4 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +573,24 @@
 				2347CEE9204E21B70091DD09 /* testObject.m */,
 			);
 			path = test;
+			sourceTree = "<group>";
+		};
+		23500390204FCA1500DC02EF /* RouteCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				23500392204FCA3700DC02EF /* RouteCollectionViewCell.h */,
+				23500391204FCA3600DC02EF /* RouteCollectionViewCell.m */,
+			);
+			path = RouteCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		23500397204FCD2D00DC02EF /* MoreMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				23500398204FCD3900DC02EF /* MoreMenuView.h */,
+				23500399204FCD3A00DC02EF /* MoreMenuView.m */,
+			);
+			path = MoreMenuView;
 			sourceTree = "<group>";
 		};
 		238BB24F20478FC40072F2C3 /* 透明背景 */ = {
@@ -800,9 +828,12 @@
 			isa = PBXGroup;
 			children = (
 				238BB25420479CC80072F2C3 /* icon_location@2x.png */,
+				23500382204F7DE000DC02EF /* trackDirection.png */,
 				238BB25320479CC80072F2C3 /* icon_location@3x.png */,
 				23A36E36202861DC00F1C730 /* XYAddTripViewController.h */,
 				23A36E37202861DC00F1C730 /* XYAddTripViewController.m */,
+				23500394204FCB0D00DC02EF /* DriveNaviViewController.h */,
+				23500395204FCB0D00DC02EF /* DriveNaviViewController.m */,
 			);
 			path = XYAddTripViewController;
 			sourceTree = "<group>";
@@ -1008,6 +1039,7 @@
 				23A36E21202846D600F1C730 /* TripCell.xib in Resources */,
 				23A36E1520283E5500F1C730 /* XYRegiestViewController.xib in Resources */,
 				238BB25620479CC80072F2C3 /* icon_location@2x.png in Resources */,
+				23500383204F7DE000DC02EF /* trackDirection.png in Resources */,
 				238BB26120493D690072F2C3 /* AddNameAlertView.xib in Resources */,
 				234692BA202193DB007DE6F4 /* LaunchScreen.storyboard in Resources */,
 				234692B7202193DB007DE6F4 /* Assets.xcassets in Resources */,
@@ -1104,8 +1136,10 @@
 			files = (
 				23A36EE0202AD2C000F1C730 /* XYHttpManager.m in Sources */,
 				2322B8BE204B9D2C0095DA01 /* LineDashPolyline.m in Sources */,
+				2350039A204FCD3A00DC02EF /* MoreMenuView.m in Sources */,
 				23A36EFD202C3B9400F1C730 /* XYUserModel.m in Sources */,
 				23A36E0A202830B300F1C730 /* SHButton.m in Sources */,
+				23500393204FCA3700DC02EF /* RouteCollectionViewCell.m in Sources */,
 				23A36E2820284E7300F1C730 /* XYMenuView.m in Sources */,
 				23A36E0F202832F000F1C730 /* WriteLog.m in Sources */,
 				23A36EDD202ACA7B00F1C730 /* HttpManager.m in Sources */,
@@ -1118,6 +1152,7 @@
 				2347CEEA204E21B70091DD09 /* testObject.m in Sources */,
 				234693182023059E007DE6F4 /* UIColor+helper.m in Sources */,
 				23A36E422029888500F1C730 /* XYDateSlecteView.m in Sources */,
+				23500396204FCB0E00DC02EF /* DriveNaviViewController.m in Sources */,
 				238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */,
 				2322B8C0204B9D2C0095DA01 /* MANaviRoute.m in Sources */,
 				23A36E20202846D600F1C730 /* TripCell.m in Sources */,
@@ -1138,6 +1173,7 @@
 				23A36E3E20295C6600F1C730 /* CalenderAnimationController.m in Sources */,
 				23C06152204CEB5800F6153E /* AnnotatationModel.m in Sources */,
 				23A36E2520284C9200F1C730 /* UIBarButtonItem+ImageTitle.m in Sources */,
+				23500381204F77D500DC02EF /* SelectableOverlay.m in Sources */,
 				2322B8B1204B9C910095DA01 /* SHMapSearchManager.m in Sources */,
 				23C0614E204CE7C300F6153E /* XYCustomAnnotationView.m in Sources */,
 				23A36EE5202AD76B00F1C730 /* XYRespons.m in Sources */,

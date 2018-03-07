@@ -9,10 +9,12 @@
 #import "SHMapSearchManager.h"
 #import "MANaviRoute.h"
 #import "CommonUtility.h"
+#import "SelectableOverlay.h"
 
-@interface SHMapSearchManager ()<AMapSearchDelegate>
+@interface SHMapSearchManager ()<AMapSearchDelegate,AMapNaviDriveManagerDelegate>
 
 @property (nonatomic,strong) AMapSearchAPI *search;
+@property (nonatomic, strong) AMapNaviDriveManager *driveManager;
 
 @property (nonatomic,assign)CGFloat startLatitude;
 @property (nonatomic,assign)CGFloat startLongitude;
@@ -21,6 +23,8 @@
 @property (nonatomic,assign)CGFloat endLongitude;
 
 @property (nonatomic,strong) AMapRouteSearchBaseRequest *lastRequest;
+
+@property (nonatomic, strong) NSMutableArray * polylines;
 @end
 
 @implementation SHMapSearchManager
@@ -32,10 +36,11 @@
         
         self.search = [[AMapSearchAPI alloc] init];
         self.search.delegate = self;
+//         [[AMapNaviDriveManager sharedInstance] setDelegate:self];
+//        self.polylines =[NSMutableArray array];
     }
     return self;
 }
-
 -(void)startSearchCityWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude
 {
     AMapReGeocodeSearchRequest *request=[[AMapReGeocodeSearchRequest alloc]init];
@@ -74,24 +79,45 @@
 //驾车
 -(void)startSearchDriveRouteWithStartLongitude:(CGFloat)startLongitude startLatitude:(CGFloat)startLatitude endLongitude:(CGFloat)endLongitude endLatitude:(CGFloat)endLatitude waypointsArray:(NSArray<AMapGeoPoint *>*)waypoints{
     AMapDrivingRouteSearchRequest *navi = [[AMapDrivingRouteSearchRequest alloc] init];
-    
+
     navi.requireExtension = YES;
-    navi.strategy = 5;
-    navi.waypoints =waypoints;
+    navi.strategy = 2;
+//    navi.waypoints =waypoints;
     /* 出发点. */
     navi.origin = [AMapGeoPoint locationWithLatitude:startLatitude
                                            longitude:startLongitude];
     /* 目的地. */
     navi.destination = [AMapGeoPoint locationWithLatitude:endLatitude
                                                 longitude:endLongitude];
-    
+
     self.lastRequest=navi;
-    
-    self.startLatitude=startLatitude;
-    self.startLongitude=startLongitude;
-    self.endLatitude=endLatitude;
-    self.endLongitude=endLongitude;
+
     [self.search AMapDrivingRouteSearch:navi];
+//    [self initProperties];
+    
+//    AMapNaviPoint * start = [AMapNaviPoint locationWithLatitude:startLatitude longitude:startLongitude];
+//    AMapNaviPoint * end  = [AMapNaviPoint locationWithLatitude:endLatitude longitude:endLongitude];
+//    
+//    [[AMapNaviDriveManager sharedInstance] calculateDriveRouteWithStartPoints:@[start]
+//                                                                    endPoints:@[end]
+//                                                                    wayPoints:nil
+//                                                              drivingStrategy:2];
+}
+- (void)initProperties
+{
+    AMapNaviPoint * start = [AMapNaviPoint locationWithLatitude:39.99 longitude:116.47];
+    AMapNaviPoint * end  = [AMapNaviPoint locationWithLatitude:39.90 longitude:116.32];
+    
+    [[AMapNaviDriveManager sharedInstance] calculateDriveRouteWithStartPoints:@[start]
+                                                                    endPoints:@[end]
+                                                                    wayPoints:nil
+                                                              drivingStrategy:2];
+}
+- (void)driveManagerOnCalculateRouteSuccess:(AMapNaviDriveManager *)driveManager
+{
+    NSLog(@"onCalculateRouteSuccess");
+    [self showNaviRoutes];
+    //显示路径或开启导航
 }
 //计算路线失败
 -(void)AMapSearchRequest:(id)request didFailWithError:(NSError *)error
@@ -102,7 +128,55 @@
     }
 }
 
--(NSArray*)polylinesWithRoute:(AMapRoute*)route
+- (void)showNaviRoutes
+{
+    if ([[AMapNaviDriveManager sharedInstance].naviRoutes count] <= 0)
+    {
+        return;
+    }
+    
+    //将路径显示到地图上
+    for (NSNumber *aRouteID in [[AMapNaviDriveManager sharedInstance].naviRoutes allKeys])
+    {
+        AMapNaviRoute *aRoute = [[self.driveManager naviRoutes] objectForKey:aRouteID];
+        int count = (int)[[aRoute routeCoordinates] count];
+        
+        //添加路径Polyline
+        CLLocationCoordinate2D *coords = (CLLocationCoordinate2D *)malloc(count * sizeof(CLLocationCoordinate2D));
+        for (int i = 0; i < count; i++)
+        {
+            AMapNaviPoint *coordinate = [[aRoute routeCoordinates] objectAtIndex:i];
+            coords[i].latitude = [coordinate latitude];
+            coords[i].longitude = [coordinate longitude];
+        }
+        
+        MAPolyline *polyline = [MAPolyline polylineWithCoordinates:coords count:count];
+        
+        SelectableOverlay *selectablePolyline = [[SelectableOverlay alloc] initWithOverlay:polyline];
+        [selectablePolyline setRouteID:[aRouteID integerValue]];
+        [self.polylines addObject: selectablePolyline];
+        free(coords);
+        [self.polylines addObject:polyline];
+        
+    }
+    if (self.routeBlock)
+    {
+        self.routeBlock(self.polylines);
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+-(NSArray*)polylinesWithRoute:(AMapRoute*)route start:(AMapGeoPoint *)start end:(AMapGeoPoint *)end
 {
     AMapPath *path=route.paths.firstObject;
     
@@ -113,12 +187,12 @@
     
     NSMutableArray *polylines = [NSMutableArray array];
     NSMutableString *stepStr=[NSMutableString string];
-    [stepStr appendString:[NSString stringWithFormat:@"%.6lf,%.6lf",self.startLongitude,self.startLatitude]];
+    [stepStr appendString:[NSString stringWithFormat:@"%.6lf,%.6lf",start.longitude,start.latitude]];
     [path.steps enumerateObjectsUsingBlock:^(AMapStep *step, NSUInteger idx, BOOL *stop) {
         [stepStr appendString:@";"];
         [stepStr appendString:step.polyline];
     }];
-    [stepStr appendString:[NSString stringWithFormat:@";%.6lf,%.6lf",self.endLongitude,self.endLatitude]];
+    [stepStr appendString:[NSString stringWithFormat:@";%.6lf,%.6lf",end.longitude,end.latitude]];
     
     
     
@@ -163,9 +237,9 @@
 /* 路径规划搜索回调. */
 - (void)onRouteSearchDone:(AMapRouteSearchBaseRequest *)request response:(AMapRouteSearchResponse *)response
 {
-    if (self.lastRequest!=request) {//避免多次点击搜索回调
-        return;
-    }
+//    if (self.lastRequest!=request) {//避免多次点击搜索回调
+//        return;
+//    }
     //    DLog(@"路线规划成功了。。。。。。。。。。。");
     if (response.route == nil){
         self.failureBlock(@"路线规划失败");
@@ -174,7 +248,7 @@
     
     if (response.count > 0)
     {
-        NSArray *array= [self polylinesWithRoute:response.route];
+        NSArray *array= [self polylinesWithRoute:response.route start:request.origin end:request.destination];
         if (array.count>0)
         {
             if (self.routeBlock)
@@ -187,6 +261,16 @@
             self.failureBlock(@"路线规划失败");
         }
     }
+}
+- (void)dealloc
+{
+    [[AMapNaviDriveManager sharedInstance] stopNavi];
+//    [[AMapNaviDriveManager sharedInstance] removeDataRepresentative:self.driveView];
+    [[AMapNaviDriveManager sharedInstance] setDelegate:nil];
+    
+    BOOL success = [AMapNaviDriveManager destroyInstance];
+    NSLog(@"单例是否销毁成功 : %d",success);
+    
 }
 
 @end

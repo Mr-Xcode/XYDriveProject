@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-
+#import <AMapNaviKit/AMapNaviKit.h>
 #import <MAMapKit/MAMapKit.h>
 typedef void(^SHAMAPSearchManagerRouteSuccess)(NSArray *polylines);
 typedef void(^SHAMAPSearchManagerCitySuccess)(NSString *city,NSString *cityCode,NSString*formattedAddress);
