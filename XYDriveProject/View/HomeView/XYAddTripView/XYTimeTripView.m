@@ -66,16 +66,27 @@
         UISwipeGestureRecognizer * recognizerDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
         [recognizerDown setDirection:(UISwipeGestureRecognizerDirectionDown)];
         [self.topTapView addGestureRecognizer:recognizerDown];
+        
+        //单击的手势
+        UITapGestureRecognizer *tapRecognize = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTap:)];
+        tapRecognize.numberOfTapsRequired = 1;
+        tapRecognize.delegate = self;
+        [tapRecognize setEnabled :YES];
+        [tapRecognize delaysTouchesBegan];
+        [tapRecognize cancelsTouchesInView];
+        
+        [self.topTapView addGestureRecognizer:tapRecognize];
     }
     return _topTapView;
 }
 - (XYDateSlecteView *)dateSelView{
     if (!_dateSelView) {
         self.dateSelView =[[XYDateSlecteView alloc]initWithFrame:CGRectMake(0, 45, SCREEN_W, 135)];
-        CGFloat r = RND_COLOR;
-        CGFloat g = RND_COLOR;
-        CGFloat b = RND_COLOR;
-        self.dateSelView.backgroundColor =[UIColor colorWithRed:r green:g blue:b alpha:1];
+//        CGFloat r = RND_COLOR;
+//        CGFloat g = RND_COLOR;
+//        CGFloat b = RND_COLOR;
+//        self.dateSelView.backgroundColor =[UIColor colorWithRed:r green:g blue:b alpha:1];
+        self.dateSelView.backgroundColor =[UIColor whiteColor];
     }
     return _dateSelView;
 }
@@ -150,21 +161,33 @@
     }
     
 }
--(void)panView:(UIPanGestureRecognizer *)panGest{
+-(void)panView:(UIPanGestureRecognizer *)recognizer{
     
-    //拖拽的距离(距离是一个累加)
-    CGPoint trans = [panGest translationInView:panGest.view];
-    NSLog(@"%@",NSStringFromCGPoint(trans));
-
-    //设置图片移动
-    CGPoint center =  self.moveView.center;
-    center.x += trans.x;
-    center.y += trans.y;
-    self.moveView.center = center;
-    self.moveView.x =45;
-
-    //清除累加的距离
-    [panGest setTranslation:CGPointZero inView:panGest.view];
+//    // Figure out where the user is trying to drag the view.
+//    CGPoint translation = [recognizer translationInView:self];
+//    CGPoint newCenter = CGPointMake(recognizer.view.center.x+ translation.x,
+//                                    recognizer.view.center.y + translation.y);//    限制屏幕范围：
+//    newCenter.y = MAX(recognizer.view.frame.size.height/2, newCenter.y);
+//    newCenter.y = MIN(self.frame.size.height - recognizer.view.frame.size.height/2,  newCenter.y);
+//    newCenter.x = MAX(recognizer.view.frame.size.width/2, newCenter.x);
+//    newCenter.x = MIN(self.frame.size.width - recognizer.view.frame.size.width/2,newCenter.x);
+//    recognizer.view.center = newCenter;
+//    [recognizer setTranslation:CGPointZero inView:self];
+    
+    
+//    //拖拽的距离(距离是一个累加)
+//    CGPoint trans = [panGest translationInView:panGest.view];
+//    NSLog(@"%@",NSStringFromCGPoint(trans));
+//
+//    //设置图片移动
+//    CGPoint center =  self.moveView.center;
+//    center.x += trans.x;
+//    center.y += trans.y;
+//    self.moveView.center = center;
+//    self.moveView.x =45;
+//
+//    //清除累加的距离
+//    [panGest setTranslation:CGPointZero inView:panGest.view];
 }
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
     if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
@@ -191,6 +214,17 @@
     if(recognizer.direction == UISwipeGestureRecognizerDirectionRight) {
         NSLog(@"swipe right");
     }
+}
+#pragma UIGestureRecognizer Handles
+-(void) handleTap:(UITapGestureRecognizer *)recognizer
+{
+    NSLog(@"---单击手势-------");
+    if (self.upBlcok) {
+        self.upBlcok(YES);
+    }
+    [UIView animateWithDuration:0.2 animations:^{
+        self.frame =CGRectMake(0, CGRectGetMaxY(self.superview.frame)-TIMEVIEWHEIGHT-64, SCREEN_W, self.bounds.size.height);
+    }];
 }
 
 /**

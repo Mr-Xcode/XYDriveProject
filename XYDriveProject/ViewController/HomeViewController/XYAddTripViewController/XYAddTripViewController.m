@@ -103,7 +103,7 @@
 - (SHMapSearchManager *)searchManager{
     if (!_searchManager) {
         self.searchManager =[[SHMapSearchManager alloc]init];
-//        __weak typeof(_xyMapView) weakMapView =_xyMapView;
+        __weak typeof(_xyMapView) weakMapView =_xyMapView;
         WeakSelf;
         self.searchManager.routeBlock = ^(NSArray *polylines) {
 //            if (weakSelf.lineOverlay) {
@@ -114,6 +114,14 @@
             
 //            weakSelf.lineOverlay=polylines.firstObject;
             [weakSelf addLineRouteWithOverlay:polylines.firstObject];
+        };
+        self.searchManager.cityBlock = ^(NSString *city, NSString *cityCode, NSString *formattedAddress) {
+            Markers * markmodel =[[Markers alloc]init];
+            weakSelf.addAnnotation.title =city;
+            weakSelf.addAnnotation.subtitle =formattedAddress;
+            markmodel.title =formattedAddress;
+            weakSelf.addAnnotation.model =markmodel;
+            [weakMapView addAnnotation:weakSelf.addAnnotation];
         };
     }
     return _searchManager;
@@ -177,8 +185,6 @@
     pointAnnotation.title = @"";
     pointAnnotation.subtitle = @"";
     self.addAnnotation =pointAnnotation;
-    [self.xyMapView addAnnotation:pointAnnotation];
-    [self.searchManager startSearchCityWithLatitude:lat longitude:lng];
 }
 #pragma mark - MAP delegate
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
@@ -222,6 +228,7 @@
 }
 //长按地图添加标注
 - (void)mapView:(MAMapView *)mapView didLongPressedAtCoordinate:(CLLocationCoordinate2D)coordinate{
+    [self.searchManager startSearchCityWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude];
 }
 #pragma mark - 让大头针不跟着地图滑动，时时显示在地图最中间
@@ -261,7 +268,7 @@
 //    [self.view addSubview:self.centerImageView];
 //    [self.view bringSubviewToFront:self.centerImageView];
 //    [self jumpAnimation:self.centerImageView];
-//    [self addTimeTripView];
+    [self addTimeTripView];
     [self getTripPoints];
     
     [self setItemsBtnTitles:@[@"上一站",@"下一站"] images:@[@"",@""] action:^(UIButton *button) {
