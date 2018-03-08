@@ -16,6 +16,7 @@ typedef void(^NavBtnAction)(UIButton *button);
  */
 @property (copy, nonatomic) NavBtnAction leftItemAction;
 @property (copy, nonatomic) NavBtnAction rightItemAction;
+@property (nonatomic, strong)UIView * rightButtonView;
 
 /*
  *
@@ -88,4 +89,8 @@ typedef void(^NavBtnAction)(UIButton *button);
  *  @param image 图片
  */
 - (void)setNavigationBarRightItemButtonTitle:(NSString *)title image:(NSString *)image;
+/**
+ * 设置菜单按钮
+ */
+- (void)setItemsBtnTitles:(NSArray *)titles images:(NSArray *)images action:(NavBtnAction)blcok;
 @end

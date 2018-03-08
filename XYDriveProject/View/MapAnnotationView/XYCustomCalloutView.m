@@ -7,6 +7,7 @@
 //
 
 #import "XYCustomCalloutView.h"
+#import "SetTripRoudeViewController.h"
 #define kPortraitMargin     5
 #define kPortraitWidth      70
 #define kPortraitHeight     50
@@ -62,7 +63,7 @@
     self.addButton.frame =CGRectMake(kPortraitMargin, kPortraitMargin, kPortraitWidth, kPortraitHeight);
     [self.addButton setTitle:@"添加" forState:UIControlStateNormal];
     self.addButton.backgroundColor =[UIColor blackColor];
-    [self.addButton addTarget:self action:@selector(searClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.addButton addTarget:self action:@selector(addClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.addButton];
 }
 - (void)setTitle:(NSString *)title
@@ -80,8 +81,10 @@
 //    self.portraitView.image = image;
     [self.addButton setImage:image forState:UIControlStateNormal];
 }
-- (void)searClick{
-    
+- (void)addClick{
+    SetTripRoudeViewController * setVC =[[SetTripRoudeViewController alloc]init];
+    setVC.model =self.model;
+    [[self viewController].navigationController pushViewController:setVC animated:YES];
 }
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

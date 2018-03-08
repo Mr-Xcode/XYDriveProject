@@ -22,6 +22,9 @@
 #import "SelectableOverlay.h"
 #import "RouteCollectionViewCell.h"
 #import "DriveNaviViewController.h"
+#import "SetTripRoudeViewController.h"
+#import "XYCustomAnnotation.h"
+#import "AnnotatationModel.h"
 #define DATEVIEW_H 450
 #define kRoutePlanInfoViewHeight    130.f
 #define kRouteIndicatorViewHeight   64.f
@@ -53,6 +56,7 @@
 //@property (nonatomic, strong) AMapSearchAPI *search;
 //大头针
 @property (nonatomic, strong) MAPointAnnotation * annotation;
+@property (nonatomic, strong) XYCustomAnnotation * addAnnotation;
 @property (nonatomic, strong)UIImageView * centerImageView;
 @property (nonatomic, strong)NSMutableArray * markersAnnotationArray;
 @property (nonatomic, strong)NSMutableArray * attributesArray;
@@ -99,7 +103,7 @@
 - (SHMapSearchManager *)searchManager{
     if (!_searchManager) {
         self.searchManager =[[SHMapSearchManager alloc]init];
-        __weak typeof(_xyMapView) weakMapView =_xyMapView;
+//        __weak typeof(_xyMapView) weakMapView =_xyMapView;
         WeakSelf;
         self.searchManager.routeBlock = ^(NSArray *polylines) {
 //            if (weakSelf.lineOverlay) {
@@ -114,7 +118,7 @@
     }
     return _searchManager;
 }
--(void)addLineRouteWithOverlay:(SHRoutePolylineRenderer*)overlay
+-(void)addLineRouteWithOverlay:(id<MAOverlay>)overlay
 {
     [_xyMapView addOverlay:overlay];
     
@@ -167,12 +171,14 @@
     }
 }
 - (void)addAnntationViewLat:(CGFloat)lat Lng:(CGFloat)lng{
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+    self.addAnnotation =nil;
+    XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
     pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, lng);
     pointAnnotation.title = @"";
     pointAnnotation.subtitle = @"";
-    
+    self.addAnnotation =pointAnnotation;
     [self.xyMapView addAnnotation:pointAnnotation];
+    [self.searchManager startSearchCityWithLatitude:lat longitude:lng];
 }
 #pragma mark - MAP delegate
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
@@ -194,8 +200,9 @@
 //        return annotationView;
 //    }
     
-    if ([annotation isKindOfClass:[MAPointAnnotation class]] && ![annotation isKindOfClass:[MAUserLocation class]])
+    if ([annotation isKindOfClass:[XYCustomAnnotation class]])
     {
+        XYCustomAnnotation * xyAnnotation =(XYCustomAnnotation *)annotation;
         static NSString *reuseIndetifier = @"annotationReuseIndetifier";
         XYCustomAnnotationView *annotationView = (XYCustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
         if (annotationView == nil)
@@ -205,6 +212,7 @@
         annotationView.image = [UIImage imageNamed:@"icon_location"];
         // 设置为NO，用以调用自定义的calloutView
         annotationView.canShowCallout = NO;
+        annotationView.model =xyAnnotation.model;
         
         // 设置中心点偏移，使得标注底部中间点成为经纬度对应点
         annotationView.centerOffset = CGPointMake(0, -18);
@@ -255,19 +263,31 @@
 //    [self jumpAnimation:self.centerImageView];
 //    [self addTimeTripView];
     [self getTripPoints];
+    
+    [self setItemsBtnTitles:@[@"上一站",@"下一站"] images:@[@"",@""] action:^(UIButton *button) {
+//        SetTripRoudeViewController * setVC =[[SetTripRoudeViewController alloc]init];
+//        [self.navigationController pushViewController:setVC animated:YES];
+        if (button.tag==201) {
+            //item1
+        }else if (button.tag ==202){
+            //item2
+        }
+    }];
 }
 - (void)getTripPoints{
     NSArray * markers = self.tirpObj[@"markers"];
     for (NSDictionary * dic in markers) {
         Markers * marker =[Markers mj_objectWithKeyValues:dic];
         NSLog(@"%@,%@",marker.attributes.city,marker.title);
-        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+
+        XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
         CLLocationCoordinate2D coor=CLLocationCoordinate2DMake([marker.attributes.lat doubleValue], [marker.attributes.lng doubleValue]);
         pointAnnotation.coordinate = coor;
         pointAnnotation.title = marker.attributes.city;
         pointAnnotation.subtitle =marker.title;
         [self.markersAnnotationArray addObject:pointAnnotation];
-        
+    
+        pointAnnotation.model =marker;
         //把所有景点的坐标存起来
         AMapGeoPoint * roadPoint = [AMapGeoPoint locationWithLatitude:coor.latitude longitude:coor.longitude];
         [self.roads addObject:roadPoint];

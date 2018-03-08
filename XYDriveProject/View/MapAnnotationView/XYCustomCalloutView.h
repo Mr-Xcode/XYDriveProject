@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AnnotatationModel.h"
 
 @interface XYCustomCalloutView : UIView
 @property (nonatomic, strong) UIImage *image; //商户图
 @property (nonatomic, copy) NSString *title; //商户名
 @property (nonatomic, copy) NSString *subtitle; //地址
+//@property (nonatomic, strong) AnnotatationModel * model;
+@property (nonatomic, strong) Markers * model;
 @end
