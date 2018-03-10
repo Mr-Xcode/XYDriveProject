@@ -14,8 +14,7 @@
 @property (strong, nonatomic) UIView *bcView;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic, assign) CGFloat pressViewWidth;
-@property (nonatomic, assign) CGPoint bPoint;
-@property (nonatomic, assign) CGRect bRect;
+@property (nonatomic, strong) NSMutableArray * addViews;
 @property (nonatomic, weak) UIView * moveView;
 @property (nonatomic, strong)XYDateSlecteView * dateSelView;
 @property (nonatomic, strong)UIView * topTapView;
@@ -38,6 +37,7 @@
     return self;
 }
 - (void)setUI{
+    self.addViews =[NSMutableArray array];
     [self addSubview:self.dateSelView];
     [self addSubview:self.topTapView];
     UIScrollView * scrollV =[[UIScrollView alloc]init];
@@ -51,7 +51,13 @@
     
     UIView * temp =[self getGridView];
     [self.scrollView addSubview:temp];
-    self.scrollView.contentSize =CGSizeMake(SCREEN_W, temp.height+30);
+    self.scrollView.contentSize =CGSizeMake(SCREEN_W, temp.height+15);
+    
+    NSInteger hourPoint =3;
+    NSInteger time =78;//假设为分钟
+    
+    
+    [self pressAddView:CGPointMake(LEFTMargin, hourPoint * HOURHEIGHT) height:time];
     
 }
 - (UIView *)topTapView{
@@ -81,7 +87,7 @@
 }
 - (XYDateSlecteView *)dateSelView{
     if (!_dateSelView) {
-        self.dateSelView =[[XYDateSlecteView alloc]initWithFrame:CGRectMake(0, 45, SCREEN_W, 135)];
+        self.dateSelView =[[XYDateSlecteView alloc]initWithFrame:CGRectMake(0,TOPGestureViewH, SCREEN_W, 135)];
 //        CGFloat r = RND_COLOR;
 //        CGFloat g = RND_COLOR;
 //        CGFloat b = RND_COLOR;
@@ -96,7 +102,7 @@
     for (int ii =0; ii<24; ii++) {
         //横线
         UIView * line =[[UIView alloc]init];
-        line.frame =CGRectMake(50, 15+60*ii, SCREEN_W-50, .5);
+        line.frame =CGRectMake(50, 15+HOURHEIGHT*ii, SCREEN_W-50, .5);
         line.backgroundColor =[UIColor grayColor];
         [view addSubview:line];
         
@@ -107,9 +113,9 @@
         timeL.size = [timeL.text boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
         timeL.font =TextFont_12;
         [view addSubview:timeL];
-        line.frame = CGRectMake(CGRectGetMaxX(timeL.frame)+5, 15+60*ii, SCREEN_W-timeL.size.width -10 -5 , .5);
+        line.frame = CGRectMake(CGRectGetMaxX(timeL.frame)+5, 15+HOURHEIGHT*ii, SCREEN_W-timeL.size.width -10 -5 , .5);
         timeL.centerY =line.centerY;
-        totalHeight +=60;
+        totalHeight +=HOURHEIGHT;
     }
     view.height =totalHeight;
     return view;
@@ -131,15 +137,16 @@
 
     
 }
-- (void)pressView:(CGPoint)point{
+- (void)pressAddView:(CGPoint)point height:(CGFloat)height{
     UIView * tempView =[[UIView alloc]init];
-    tempView.frame =CGRectMake(45, point.y, SCREEN_W - 45, 60);
+    tempView.frame =CGRectMake(LEFTMargin, 15+point.y, SCREEN_W - LEFTMargin, height);
     tempView.backgroundColor =[UIColor blueColor];
     [self.scrollView addSubview:tempView];
     self.moveView =tempView;
     //拖拽
     UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
     [self.moveView addGestureRecognizer:panGest];
+    [self.addViews addObject:tempView];
     
 }
 -(void)longPressView:(UILongPressGestureRecognizer *)longPressGest{
@@ -148,13 +155,16 @@
     if (longPressGest.state==UIGestureRecognizerStateBegan) {
         NSLog(@"长按手势开启");
         CGPoint longPressPoint =[longPressGest locationInView:self.scrollView];
-        BOOL isZai =CGRectContainsPoint(self.moveView.frame, longPressPoint);
-        if (isZai) {
-            DLog(@"和上次点击的在同一个区域，则不再创建");
-            return;
+        if (!ICIsObjectEmpty(self.addViews)) {
+            for (UIView * view in self.addViews) {
+                if (CGRectContainsPoint(view.frame, longPressPoint)) {
+                    //如果遍历到长按的点在已添加的view里面，则不再创建
+                    DLog(@"和上次点击的在同一个区域，则不再创建");
+                    return;
+                }
+            }
+            [self pressAddView:longPressPoint height:HOURHEIGHT];
         }
-        [self pressView:longPressPoint];
-        self.bPoint =longPressPoint;
     } else {
         NSLog(@"长按手势结束");
         
@@ -163,31 +173,65 @@
 }
 -(void)panView:(UIPanGestureRecognizer *)recognizer{
     
-//    // Figure out where the user is trying to drag the view.
-//    CGPoint translation = [recognizer translationInView:self];
-//    CGPoint newCenter = CGPointMake(recognizer.view.center.x+ translation.x,
-//                                    recognizer.view.center.y + translation.y);//    限制屏幕范围：
-//    newCenter.y = MAX(recognizer.view.frame.size.height/2, newCenter.y);
-//    newCenter.y = MIN(self.frame.size.height - recognizer.view.frame.size.height/2,  newCenter.y);
-//    newCenter.x = MAX(recognizer.view.frame.size.width/2, newCenter.x);
-//    newCenter.x = MIN(self.frame.size.width - recognizer.view.frame.size.width/2,newCenter.x);
-//    recognizer.view.center = newCenter;
-//    [recognizer setTranslation:CGPointZero inView:self];
+    UIView * panView =recognizer.view;
     
-    
-//    //拖拽的距离(距离是一个累加)
-//    CGPoint trans = [panGest translationInView:panGest.view];
+    //拖拽的距离(距离是一个累加)
+    CGPoint trans = [recognizer translationInView:panView];
 //    NSLog(@"%@",NSStringFromCGPoint(trans));
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+    }
+    if (recognizer.state == UIGestureRecognizerStateChanged) {
+        CGRect frame =panView.frame;
+        frame.origin.x +=trans.x;
+        frame.origin.y +=trans.y;
+        panView.frame =frame;
+        
+//        CGPoint scrollPoint =self.scrollView.contentOffset;
+//        CGFloat bottomY =self.moveView.frame.origin.y +self.moveView.frame.size.height;
+//        CGFloat topY =self.moveView.frame.origin.y;
 //
-//    //设置图片移动
-//    CGPoint center =  self.moveView.center;
-//    center.x += trans.x;
-//    center.y += trans.y;
-//    self.moveView.center = center;
-//    self.moveView.x =45;
-//
-//    //清除累加的距离
-//    [panGest setTranslation:CGPointZero inView:panGest.view];
+//        if (bottomY >scrollPoint.y) {
+//            NSLog(@"滑块的位置：%@,scrollView的滑动位置:%@",NSStringFromCGPoint(self.moveView.frame.origin),NSStringFromCGPoint(self.scrollView.contentOffset));
+////            scrollPoint.y +=y
+//            [self.scrollView setContentOffset:CGPointMake(0, bottomY) animated:YES];
+//        }else if (topY <scrollPoint.y){
+//            NSLog(@"滑块的位置：%@,scrollView的滑动位置:%@",NSStringFromCGPoint(self.moveView.frame.origin),NSStringFromCGPoint(self.scrollView.contentOffset));
+//            [self.scrollView setContentOffset:CGPointMake(0, topY) animated:YES];
+//        }
+        
+//        CGFloat contentPointY =self.scrollView.contentOffset.y;
+//        NSLog(@"%@",NSStringFromCGPoint(self.scrollView.contentOffset));
+//        [self.scrollView setContentOffset:CGPointMake(0, y) animated:YES];
+//        if (y>contentPointY) {
+//            [self.scrollView setContentOffset:CGPointMake(0, y) animated:YES];
+//        }else if (y<contentPointY){
+//            [self.scrollView setContentOffset:CGPointMake(0, y) animated:YES];
+//        }
+    }else if (recognizer.state ==UIGestureRecognizerStateEnded || recognizer.state ==UIGestureRecognizerStateCancelled){
+        CGFloat x=panView.origin.x;
+        if (x <=LEFTMargin) {
+            x =LEFTMargin;
+        }else if (x >SCREEN_W -panView.frame.size.width){
+            x =SCREEN_W -panView.frame.size.width;
+        }
+        
+        CGFloat y =panView.origin.y;
+        if (y <=15) {
+            y =15;
+        }else if (y >self.scrollView.contentSize.height -panView.frame.size.height){
+            y =self.scrollView.contentSize.height -panView.frame.size.height;
+        }
+        [UIView animateWithDuration:0.5 animations:^{
+            panView.frame =CGRectMake(x, y, panView.frame.size.width, panView.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+
+    //清除累加的距离
+    [recognizer setTranslation:CGPointZero inView:self.scrollView];
 }
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
     if(recognizer.direction == UISwipeGestureRecognizerDirectionDown) {

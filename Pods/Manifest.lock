@@ -35,6 +35,7 @@ PODS:
   - AVOSCloudIM/_NOARC (8.2.0):
     - AVOSCloud (= 8.2.0)
   - BaiduMobStat (4.6.5)
+  - DateTools (2.0.0)
   - DZNEmptyDataSet (1.8.1)
   - IQKeyboardManager (5.0.7)
   - JCore (1.1.7)
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - AVOSCloud
   - AVOSCloudIM
   - BaiduMobStat
+  - DateTools
   - DZNEmptyDataSet
   - IQKeyboardManager
   - JPush
@@ -80,6 +82,7 @@ SPEC CHECKSUMS:
   AVOSCloud: c28318404ce474e722e09c8ac103fc58b2610074
   AVOSCloudIM: 62c0d6307df41ce682f7cf11463254cc49318e24
   BaiduMobStat: 41c1a17c89397d80e96eff37da5dab9e600fc7a2
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   JCore: f7459c81c135281a874a6beafdd321666adcc834
@@ -92,6 +95,6 @@ SPEC CHECKSUMS:
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   WechatOpenSDK: 491d965d79335070328571d3e79f714549e79a5e
 
-PODFILE CHECKSUM: 028eef9691253064e5c37d5197341da2e0fcfe65
+PODFILE CHECKSUM: e8d0dcc77c4cef7382ed5d23d338c8a35de9160c
 
 COCOAPODS: 1.4.0

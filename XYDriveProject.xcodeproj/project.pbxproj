@@ -39,6 +39,7 @@
 		2350039E2050CF5000DC02EF /* SetTripRoudeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2350039C2050CF5000DC02EF /* SetTripRoudeViewController.m */; };
 		2350039F2050CF5000DC02EF /* SetTripRoudeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2350039D2050CF5000DC02EF /* SetTripRoudeViewController.xib */; };
 		235003A22050DE0A00DC02EF /* XYCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 235003A12050DE0A00DC02EF /* XYCustomAnnotation.m */; };
+		237DF42E205374840016459E /* BFDragGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 237DF42D205374840016459E /* BFDragGestureRecognizer.m */; };
 		238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238BB25120478FF50072F2C3 /* XYCoverView.m */; };
 		238BB25520479CC80072F2C3 /* icon_location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25320479CC80072F2C3 /* icon_location@3x.png */; };
 		238BB25620479CC80072F2C3 /* icon_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25420479CC80072F2C3 /* icon_location@2x.png */; };
@@ -158,6 +159,8 @@
 		2350039D2050CF5000DC02EF /* SetTripRoudeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetTripRoudeViewController.xib; sourceTree = "<group>"; };
 		235003A02050DE0A00DC02EF /* XYCustomAnnotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCustomAnnotation.h; sourceTree = "<group>"; };
 		235003A12050DE0A00DC02EF /* XYCustomAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCustomAnnotation.m; sourceTree = "<group>"; };
+		237DF42C205374840016459E /* BFDragGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDragGestureRecognizer.h; sourceTree = "<group>"; };
+		237DF42D205374840016459E /* BFDragGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDragGestureRecognizer.m; sourceTree = "<group>"; };
 		238BB25020478FF50072F2C3 /* XYCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCoverView.h; sourceTree = "<group>"; };
 		238BB25120478FF50072F2C3 /* XYCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCoverView.m; sourceTree = "<group>"; };
 		238BB25320479CC80072F2C3 /* icon_location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_location@3x.png"; sourceTree = "<group>"; };
@@ -503,6 +506,7 @@
 		234692EE2022E4AD007DE6F4 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				237DF42B205374720016459E /* BFDragGestureRecognizer */,
 				23A36E3B20295C5E00F1C730 /* Transition */,
 			);
 			path = Util;
@@ -599,6 +603,15 @@
 				23500399204FCD3A00DC02EF /* MoreMenuView.m */,
 			);
 			path = MoreMenuView;
+			sourceTree = "<group>";
+		};
+		237DF42B205374720016459E /* BFDragGestureRecognizer */ = {
+			isa = PBXGroup;
+			children = (
+				237DF42C205374840016459E /* BFDragGestureRecognizer.h */,
+				237DF42D205374840016459E /* BFDragGestureRecognizer.m */,
+			);
+			path = BFDragGestureRecognizer;
 			sourceTree = "<group>";
 		};
 		238BB24F20478FC40072F2C3 /* 透明背景 */ = {
@@ -752,34 +765,8 @@
 			isa = PBXGroup;
 			children = (
 				238BB24F20478FC40072F2C3 /* 透明背景 */,
-				23A36EE2202AD4C600F1C730 /* Tost */,
-				23A36EE1202AD4AE00F1C730 /* Loading */,
-				23A36E172028464700F1C730 /* AlertView */,
-				23A36E182028464700F1C730 /* HubView */,
-				23A36E192028464700F1C730 /* UpdateView */,
 			);
 			path = FunctionView;
-			sourceTree = "<group>";
-		};
-		23A36E172028464700F1C730 /* AlertView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AlertView;
-			sourceTree = "<group>";
-		};
-		23A36E182028464700F1C730 /* HubView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HubView;
-			sourceTree = "<group>";
-		};
-		23A36E192028464700F1C730 /* UpdateView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UpdateView;
 			sourceTree = "<group>";
 		};
 		23A36E1A2028467800F1C730 /* HomeView */ = {
@@ -888,20 +875,6 @@
 				235003A12050DE0A00DC02EF /* XYCustomAnnotation.m */,
 			);
 			path = MapAnnotationView;
-			sourceTree = "<group>";
-		};
-		23A36EE1202AD4AE00F1C730 /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Loading;
-			sourceTree = "<group>";
-		};
-		23A36EE2202AD4C600F1C730 /* Tost */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tost;
 			sourceTree = "<group>";
 		};
 		23A36EF9202C3B7000F1C730 /* BaseModel */ = {
@@ -1092,6 +1065,7 @@
 				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/AMapNavi/AMapNaviKit.framework/AMapNavi.bundle",
 				"${PODS_ROOT}/AVOSCloud/AVOS/AVOSCloud/AVOSCloud_Art.inc",
+				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -1100,6 +1074,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMapNavi.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AVOSCloud_Art.inc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
@@ -1155,6 +1130,7 @@
 				23A36E0A202830B300F1C730 /* SHButton.m in Sources */,
 				23500393204FCA3700DC02EF /* RouteCollectionViewCell.m in Sources */,
 				23A36E2820284E7300F1C730 /* XYMenuView.m in Sources */,
+				237DF42E205374840016459E /* BFDragGestureRecognizer.m in Sources */,
 				23A36E0F202832F000F1C730 /* WriteLog.m in Sources */,
 				23A36EDD202ACA7B00F1C730 /* HttpManager.m in Sources */,
 				234692FD2022E619007DE6F4 /* XYHomeViewController.m in Sources */,

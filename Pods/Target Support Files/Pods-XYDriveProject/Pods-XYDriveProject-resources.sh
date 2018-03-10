@@ -87,6 +87,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle"
   install_resource "${PODS_ROOT}/AMapNavi/AMapNaviKit.framework/AMapNavi.bundle"
   install_resource "${PODS_ROOT}/AVOSCloud/AVOS/AVOSCloud/AVOSCloud_Art.inc"
+  install_resource "${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle"
   install_resource "${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
@@ -94,6 +95,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle"
   install_resource "${PODS_ROOT}/AMapNavi/AMapNaviKit.framework/AMapNavi.bundle"
   install_resource "${PODS_ROOT}/AVOSCloud/AVOS/AVOSCloud/AVOSCloud_Art.inc"
+  install_resource "${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle"
   install_resource "${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
   install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
