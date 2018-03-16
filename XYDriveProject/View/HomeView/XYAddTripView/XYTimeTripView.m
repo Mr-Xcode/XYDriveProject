@@ -200,4 +200,20 @@
     
     return YES;
 }
+#pragma mark 创建cell的快照
+- (UIView *)customSnapshoFromView:(UIView *)inputView {
+    // 用cell的图层生成UIImage，方便一会显示
+    UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, NO, 0);
+    [inputView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    // 自定义这个快照的样子（下面的一些参数可以自己随意设置）
+    UIView *snapshot = [[UIImageView alloc] initWithImage:image];
+    snapshot.layer.masksToBounds = NO;
+    snapshot.layer.cornerRadius = 0.0;
+    snapshot.layer.shadowOffset = CGSizeMake(-5.0, 0.0);
+    snapshot.layer.shadowRadius = 5.0;
+    snapshot.layer.shadowOpacity = 0.4;
+    return snapshot;
+}
 @end
