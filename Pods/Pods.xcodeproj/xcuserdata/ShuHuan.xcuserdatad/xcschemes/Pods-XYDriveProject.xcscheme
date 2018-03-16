@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3478B17371C54DBD768A3C49F837EBE0'
+               BlueprintIdentifier = '8A6187111DF50887FDC357AD8EB6516C'
                BlueprintName = 'Pods-XYDriveProject'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-XYDriveProject.a'>

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#define TIMEVIEWHEIGHT 400
-#define TOPGestureViewH 45
+#import "FloatingView.h"
+
 typedef void(^UpSwipeGestureBlcok)(BOOL up);
 
 @interface XYTimeTripView : UIView
+- (instancetype)initWithFrame:(CGRect)frame markers:(NSArray *)array;
 @property (nonatomic, copy)UpSwipeGestureBlcok upBlcok;
 @end
