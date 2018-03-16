@@ -18,6 +18,10 @@
 @property (nonatomic, weak) UIView * moveView;
 @property (nonatomic, strong)XYDateSlecteView * dateSelView;
 @property (nonatomic, strong)UIView * topTapView;
+@property (nonatomic, strong)FloatingView * adView;
+@property (nonatomic, strong) NSDate * startDate;
+@property (nonatomic, strong) NSDate * endDate;
+@property (nonatomic,strong) NSArray * markers;
 @end
 
 @implementation XYTimeTripView
@@ -29,9 +33,10 @@
     // Drawing code
 }
 */
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame markers:(NSArray *)array{
     self =[super initWithFrame:frame];
     if (self) {
+        self.markers =array;
         [self setUI];
     }
     return self;
@@ -96,6 +101,12 @@
     }
     return _dateSelView;
 }
+- (FloatingView *)adView{
+    if (!_adView) {
+        self.adView =[[FloatingView alloc]init];
+    }
+    return _adView;
+}
 - (UIView *)getGridView{
     UIView * view =[[UIView alloc]init];
     CGFloat totalHeight =0;
@@ -131,22 +142,22 @@
     longPressGest.allowableMovement = 30;
     [self.scrollView addGestureRecognizer:longPressGest];
     
-//    //拖拽
-//    UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
-//    [self.scrollView addGestureRecognizer:panGest];
-
-    
 }
 - (void)pressAddView:(CGPoint)point height:(CGFloat)height{
+    
     UIView * tempView =[[UIView alloc]init];
     tempView.frame =CGRectMake(LEFTMargin, 15+point.y, SCREEN_W - LEFTMargin, height);
     tempView.backgroundColor =[UIColor blueColor];
     [self.scrollView addSubview:tempView];
     self.moveView =tempView;
+    [self.addViews addObject:tempView];
+    
+    
+    UILongPressGestureRecognizer *longPressGest = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressView:)];
+    [tempView addGestureRecognizer:longPressGest];
     //拖拽
     UIPanGestureRecognizer *panGest = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panView:)];
     [self.moveView addGestureRecognizer:panGest];
-    [self.addViews addObject:tempView];
     
 }
 -(void)longPressView:(UILongPressGestureRecognizer *)longPressGest{
@@ -164,8 +175,13 @@
                 }
             }
             [self pressAddView:longPressPoint height:HOURHEIGHT];
+        }else{
+            [self pressAddView:longPressPoint height:HOURHEIGHT];
         }
-    } else {
+    }else if (longPressGest.state==UIGestureRecognizerStateChanged){
+        
+    }
+    else {
         NSLog(@"长按手势结束");
         
     }
@@ -188,27 +204,6 @@
         frame.origin.y +=trans.y;
         panView.frame =frame;
         
-//        CGPoint scrollPoint =self.scrollView.contentOffset;
-//        CGFloat bottomY =self.moveView.frame.origin.y +self.moveView.frame.size.height;
-//        CGFloat topY =self.moveView.frame.origin.y;
-//
-//        if (bottomY >scrollPoint.y) {
-//            NSLog(@"滑块的位置：%@,scrollView的滑动位置:%@",NSStringFromCGPoint(self.moveView.frame.origin),NSStringFromCGPoint(self.scrollView.contentOffset));
-////            scrollPoint.y +=y
-//            [self.scrollView setContentOffset:CGPointMake(0, bottomY) animated:YES];
-//        }else if (topY <scrollPoint.y){
-//            NSLog(@"滑块的位置：%@,scrollView的滑动位置:%@",NSStringFromCGPoint(self.moveView.frame.origin),NSStringFromCGPoint(self.scrollView.contentOffset));
-//            [self.scrollView setContentOffset:CGPointMake(0, topY) animated:YES];
-//        }
-        
-//        CGFloat contentPointY =self.scrollView.contentOffset.y;
-//        NSLog(@"%@",NSStringFromCGPoint(self.scrollView.contentOffset));
-//        [self.scrollView setContentOffset:CGPointMake(0, y) animated:YES];
-//        if (y>contentPointY) {
-//            [self.scrollView setContentOffset:CGPointMake(0, y) animated:YES];
-//        }else if (y<contentPointY){
-//            [self.scrollView setContentOffset:CGPointMake(0, y) animated:YES];
-//        }
     }else if (recognizer.state ==UIGestureRecognizerStateEnded || recognizer.state ==UIGestureRecognizerStateCancelled){
         CGFloat x=panView.origin.x;
         if (x <=LEFTMargin) {

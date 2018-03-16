@@ -59,7 +59,7 @@
 @property (nonatomic, strong) XYCustomAnnotation * addAnnotation;
 @property (nonatomic, strong)UIImageView * centerImageView;
 @property (nonatomic, strong)NSMutableArray * markersAnnotationArray;
-@property (nonatomic, strong)NSMutableArray * attributesArray;
+@property (nonatomic, strong)NSMutableArray * markersArray;
 @property (nonatomic, strong)NSMutableArray * roads;
 
 @end
@@ -255,6 +255,7 @@
     self.markersAnnotationArray =[NSMutableArray array];
     self.roads =[NSMutableArray array];
     self.routeIndicatorInfoArray = [NSMutableArray array];
+    self.markersArray =[NSMutableArray array];
 //    [self.view addSubview:self.dateSelView];
 //    self.animationController = [[CalenderAnimationController alloc] init];
     [self addMapView];
@@ -268,7 +269,6 @@
 //    [self.view addSubview:self.centerImageView];
 //    [self.view bringSubviewToFront:self.centerImageView];
 //    [self jumpAnimation:self.centerImageView];
-    [self addTimeTripView];
     [self getTripPoints];
     
     [self setItemsBtnTitles:@[@"上一站",@"下一站"] images:@[@"",@""] action:^(UIButton *button) {
@@ -286,7 +286,7 @@
     for (NSDictionary * dic in markers) {
         Markers * marker =[Markers mj_objectWithKeyValues:dic];
         NSLog(@"%@,%@",marker.attributes.city,marker.title);
-
+        [self.markersArray addObject:marker];
         XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
         CLLocationCoordinate2D coor=CLLocationCoordinate2DMake([marker.attributes.lat doubleValue], [marker.attributes.lng doubleValue]);
         pointAnnotation.coordinate = coor;
@@ -302,6 +302,7 @@
     }
     [self.xyMapView addAnnotations:self.markersAnnotationArray];
     [self addDriveLine:self.tripRoadIndex];
+    [self addTimeTripView];
 }
 - (void)initRouteIndicatorView
 {
@@ -383,7 +384,7 @@
     [UIView commitAnimations];
 }
 - (void)addTimeTripView{
-    XYTimeTripView * timeView =[[XYTimeTripView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.xyMapView.frame)-64, SCREEN_W,TIMEVIEWHEIGHT)];
+    XYTimeTripView * timeView =[[XYTimeTripView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.xyMapView.frame)-64, SCREEN_W,TIMEVIEWHEIGHT) markers:self.markersArray];
     [self.view addSubview:timeView];
 }
 - (void)didReceiveMemoryWarning {

@@ -40,6 +40,7 @@
 		2350039F2050CF5000DC02EF /* SetTripRoudeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2350039D2050CF5000DC02EF /* SetTripRoudeViewController.xib */; };
 		235003A22050DE0A00DC02EF /* XYCustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 235003A12050DE0A00DC02EF /* XYCustomAnnotation.m */; };
 		237DF42E205374840016459E /* BFDragGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 237DF42D205374840016459E /* BFDragGestureRecognizer.m */; };
+		237DF4312053CAF70016459E /* FloatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237DF4302053CAF70016459E /* FloatingView.m */; };
 		238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238BB25120478FF50072F2C3 /* XYCoverView.m */; };
 		238BB25520479CC80072F2C3 /* icon_location@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25320479CC80072F2C3 /* icon_location@3x.png */; };
 		238BB25620479CC80072F2C3 /* icon_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238BB25420479CC80072F2C3 /* icon_location@2x.png */; };
@@ -161,6 +162,8 @@
 		235003A12050DE0A00DC02EF /* XYCustomAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCustomAnnotation.m; sourceTree = "<group>"; };
 		237DF42C205374840016459E /* BFDragGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFDragGestureRecognizer.h; sourceTree = "<group>"; };
 		237DF42D205374840016459E /* BFDragGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFDragGestureRecognizer.m; sourceTree = "<group>"; };
+		237DF42F2053CAF70016459E /* FloatingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FloatingView.h; sourceTree = "<group>"; };
+		237DF4302053CAF70016459E /* FloatingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FloatingView.m; sourceTree = "<group>"; };
 		238BB25020478FF50072F2C3 /* XYCoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCoverView.h; sourceTree = "<group>"; };
 		238BB25120478FF50072F2C3 /* XYCoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCoverView.m; sourceTree = "<group>"; };
 		238BB25320479CC80072F2C3 /* icon_location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_location@3x.png"; sourceTree = "<group>"; };
@@ -860,6 +863,8 @@
 				23A36E412029888500F1C730 /* XYDateSlecteView.m */,
 				238BB2572047C5A50072F2C3 /* XYTimeTripView.h */,
 				238BB2582047C5A50072F2C3 /* XYTimeTripView.m */,
+				237DF42F2053CAF70016459E /* FloatingView.h */,
+				237DF4302053CAF70016459E /* FloatingView.m */,
 			);
 			path = XYAddTripView;
 			sourceTree = "<group>";
@@ -1163,6 +1168,7 @@
 				23A36E38202861DC00F1C730 /* XYAddTripViewController.m in Sources */,
 				23A36E3E20295C6600F1C730 /* CalenderAnimationController.m in Sources */,
 				23C06152204CEB5800F6153E /* AnnotatationModel.m in Sources */,
+				237DF4312053CAF70016459E /* FloatingView.m in Sources */,
 				23A36E2520284C9200F1C730 /* UIBarButtonItem+ImageTitle.m in Sources */,
 				23500381204F77D500DC02EF /* SelectableOverlay.m in Sources */,
 				2350039E2050CF5000DC02EF /* SetTripRoudeViewController.m in Sources */,
