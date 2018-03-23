@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8A6187111DF50887FDC357AD8EB6516C'
-               BlueprintName = 'Pods-XYDriveProject'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-XYDriveProject.a'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "587356AFDFB9071A8F46565C60C1A17A"
+               BlueprintName = "Pods-XYDriveProject"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "libPods-XYDriveProject.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

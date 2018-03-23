@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^AddClickBlock)();
+typedef void(^AddClickBlock)(AVObject * obj);
 
 @interface AddNameAlertView : UIView
+//+ (void)showAddNameView;
 @property (nonatomic, copy) AddClickBlock addBlcok;
-//- (instancetype)initWithBlcok:(AddClickBlock)block;
+- (instancetype)initWithShowAddBlock:(AddClickBlock)block;
+- (void)show;
 @end

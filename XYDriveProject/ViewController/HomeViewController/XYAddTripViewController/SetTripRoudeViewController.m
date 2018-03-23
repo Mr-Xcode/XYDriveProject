@@ -7,8 +7,9 @@
 //
 
 #import "SetTripRoudeViewController.h"
-
-@interface SetTripRoudeViewController ()
+#import <PGDatePicker/PGDatePickManager.h>
+#import "NSDate+PGCategory.h"
+@interface SetTripRoudeViewController ()<PGDatePickerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
 @property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
@@ -38,10 +39,34 @@
 - (IBAction)searchBtnClick:(id)sender {
 }
 - (IBAction)startBtnClick:(id)sender {
+    [self showTimeAlert];
 }
 - (IBAction)endBtnClick:(id)sender {
+    [self showTimeAlert];
 }
-
+- (void)showTimeAlert{
+    
+    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
+    PGDatePicker *datePicker = datePickManager.datePicker;
+    datePicker.delegate = self;
+    datePicker.datePickerMode = PGDatePickerModeDateAndTime;
+    [self presentViewController:datePickManager animated:false completion:nil];
+}
+#pragma PGDatePickerDelegate
+- (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
+    NSDate * date =[NSDate setYear:dateComponents.year month:dateComponents.month day:dateComponents.day hour:dateComponents.hour minute:dateComponents.minute];
+    NSString * string =[self dateFormattingWithDate:date toFormate:@"YYYY-MM-dd HH:mm"];
+    NSLog(@"date = %@", string);
+//    [self.goTimeButton setTitle:string forState:UIControlStateNormal];
+//    self.selTimeStr =string;
+    
+}
+- (NSString *)dateFormattingWithDate:(NSDate *)date toFormate:(NSString *)formate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:formate];
+    return [formatter stringFromDate:date];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -283,26 +283,43 @@
 }
 - (void)getTripPoints{
     NSArray * markers = self.tirpObj[@"markers"];
-    for (NSDictionary * dic in markers) {
-        Markers * marker =[Markers mj_objectWithKeyValues:dic];
-        NSLog(@"%@,%@",marker.attributes.city,marker.title);
-        [self.markersArray addObject:marker];
-        XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
-        CLLocationCoordinate2D coor=CLLocationCoordinate2DMake([marker.attributes.lat doubleValue], [marker.attributes.lng doubleValue]);
-        pointAnnotation.coordinate = coor;
-        pointAnnotation.title = marker.attributes.city;
-        pointAnnotation.subtitle =marker.title;
-        [self.markersAnnotationArray addObject:pointAnnotation];
-    
-        pointAnnotation.model =marker;
-        //把所有景点的坐标存起来
-        AMapGeoPoint * roadPoint = [AMapGeoPoint locationWithLatitude:coor.latitude longitude:coor.longitude];
-        [self.roads addObject:roadPoint];
+    if (!ICIsObjectEmpty(markers)) {
+        for (NSDictionary * dic in markers) {
+            Markers * marker =[Markers mj_objectWithKeyValues:dic];
+            NSLog(@"%@,%@",marker.attributes.city,marker.title);
+            [self.markersArray addObject:marker];
+            XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
+            CLLocationCoordinate2D coor=CLLocationCoordinate2DMake([marker.attributes.lat doubleValue], [marker.attributes.lng doubleValue]);
+            pointAnnotation.coordinate = coor;
+            pointAnnotation.title = marker.attributes.city;
+            pointAnnotation.subtitle =marker.title;
+            [self.markersAnnotationArray addObject:pointAnnotation];
+            
+            pointAnnotation.model =marker;
+            //把所有景点的坐标存起来
+            AMapGeoPoint * roadPoint = [AMapGeoPoint locationWithLatitude:coor.latitude longitude:coor.longitude];
+            [self.roads addObject:roadPoint];
+            
+        }
+        [self.xyMapView addAnnotations:self.markersAnnotationArray];
+        [self addDriveLine:self.tripRoadIndex];
+        [self addTimeTripView];
+    }else{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"没有任何行程"
+                                                                                 message:@"是否立即添加行程？"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"添加" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"OK Action");
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"让我想想" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"Cancel Action");
+        }];
         
+        [alertController addAction:okAction];           // A
+        [alertController addAction:cancelAction];       // B
+        [self presentViewController:alertController animated:YES completion:nil];
     }
-    [self.xyMapView addAnnotations:self.markersAnnotationArray];
-    [self addDriveLine:self.tripRoadIndex];
-    [self addTimeTripView];
+    
 }
 - (void)initRouteIndicatorView
 {

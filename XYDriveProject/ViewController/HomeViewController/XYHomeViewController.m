@@ -23,13 +23,23 @@
 @property (nonatomic, strong)XYMenuView * menuView;
 @property (nonatomic,weak)  BackGroundGestureView *backView;
 @property (nonatomic, strong)NSMutableArray * dataList;
-@property (nonatomic, weak) AddNameAlertView * addV;
+@property (nonatomic, weak) UIRefreshControl * xyrefreshControl;
 
 @end
 
 @implementation XYHomeViewController
 
 #pragma mark - LayzLoad and UI
+// 下拉刷新
+- (void)setupRefresh {
+    NSLog(@"setupRefresh -- 下拉刷新");
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(showData) forControlEvents:UIControlEventValueChanged];
+    [self.homeTableView addSubview:refreshControl];
+    [refreshControl beginRefreshing];
+    self.xyrefreshControl =refreshControl;
+//    [self refreshClick:refreshControl];
+}
 - (UITableView *)homeTableView{
     if (!_homeTableView) {
         self.homeTableView =[[UITableView alloc]initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
@@ -41,6 +51,7 @@
         [self.homeTableView registerNib:[UINib nibWithNibName:@"TripCell" bundle:nil] forCellReuseIdentifier:@"cell"];
         self.homeTableView.estimatedSectionFooterHeight=0;
         self.homeTableView.estimatedSectionHeaderHeight=0;
+        [self setupRefresh];
     }
     return _homeTableView;
 }
@@ -54,21 +65,27 @@
         [self.navigationController.view addSubview:_menuView];
     }
     
-    AddNameAlertView * addView =[AddNameAlertView viewFromXib];
-    addView.frame =CGRectMake(0, CGRectGetMaxY(self.view.frame), SCREEN_W, 300);
-    [self.view addSubview:addView];
-    self.addV =addView;
+//    AddNameAlertView * addView =[AddNameAlertView viewFromXib];
+//    addView.frame =CGRectMake(0, CGRectGetMinY(self.view.frame)-30, SCREEN_W, 300);
+//    [self.view addSubview:addView];
+//    self.addV =addView;
 }
 - (void)showData{
     AVUser * currentUser =[AVUser currentUser];
     if (currentUser && !ICIsStringEmpty(currentUser.sessionToken)) {
+        [UILoading showMessage:@"刷新中……"];
         [currentUser isAuthenticatedWithSessionToken:currentUser.sessionToken callback:^(BOOL succeeded, NSError * _Nullable error) {
+            [self.xyrefreshControl endRefreshing];
+            [UILoading hide];
             if (succeeded) {
                 // 用户的 sessionToken 有效
                 AVQuery *query = [AVQuery queryWithClassName:SqlRoadbook];
                 [query whereKey:@"userId" equalTo:currentUser.objectId];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     if (!error) {
+                        if (!ICIsObjectEmpty(self.dataList)) {
+                            [self.dataList removeAllObjects];
+                        }
                         NSArray<AVObject *> *todos = objects;
                         for (AVObject *todo in todos) {
                             [self.dataList addObject:todo];
@@ -139,14 +156,10 @@
 }
 - (void)addTrip{
     WeakSelf;
-    self.addV.addBlcok = ^{
-        [UIView animateWithDuration:0.2 animations:^{
-            weakSelf.addV.frame =CGRectMake(0, CGRectGetMaxY(self.view.frame), SCREEN_W, 300);
-        }];
-    };
-    [UIView animateWithDuration:0.2 animations:^{
-        self.addV.frame =CGRectMake(0, CGRectGetMaxY(self.view.frame)-300, SCREEN_W, 300);
-    }];
+    [[[AddNameAlertView alloc]initWithShowAddBlock:^(AVObject *obj) {
+        DLog(@"添加了一个行程：%@",obj[@"name"]);
+        [weakSelf pushAddVC:obj];
+    }]show];
 }
 #pragma mark - TableView Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -184,6 +197,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     AVObject * obj= self.dataList[indexPath.section];
+    [self pushAddVC:obj];
+}
+- (void)pushAddVC:(AVObject *)obj{
     XYAddTripViewController * addVC =[[XYAddTripViewController alloc]init];
     addVC.tirpObj =obj;
     [self.navigationController pushViewController:addVC animated:YES];

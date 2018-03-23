@@ -27,6 +27,7 @@
         XYHomeViewController * homeVC =[[XYHomeViewController alloc]init];
         UINavigationController * nav =[[UINavigationController alloc]initWithRootViewController:homeVC];
         [UIApplication sharedApplication].keyWindow.rootViewController  =nav;
+//        XYKeyWindow.rootViewController =nav;
     }else{
         [self enterLoginView];
     }
@@ -44,6 +45,7 @@
     XYLoginViewController * loginVC =[[XYLoginViewController alloc]init];
     UINavigationController * nav =[[UINavigationController alloc]initWithRootViewController:loginVC];
     [UIApplication sharedApplication].keyWindow.rootViewController  =nav;
+//    XYKeyWindow.rootViewController  =nav;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

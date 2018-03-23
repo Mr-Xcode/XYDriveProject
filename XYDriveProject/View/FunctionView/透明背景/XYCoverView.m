@@ -23,7 +23,8 @@
 }
 
 +(void)showTargetView:(UIView *)targetView CanHide:(BOOL)canhide ClickBackGroundHideBlock:(XYCoverViewClickBackGroungHideBlcok)block{
-    UIView *view=[[[UIApplication sharedApplication] windows]firstObject] ;
+//    UIView *view=[[[UIApplication sharedApplication] windows]firstObject] ;
+    UIView *view=[UIApplication sharedApplication].keyWindow.rootViewController.view;
     XYCoverView *cover= [[XYCoverView alloc]init];
     cover.frame=view.bounds;
     cover.targetView=targetView;
@@ -56,7 +57,7 @@
     }];
 }
 +(void)showTargetView:(UIView *)targetView{
-    [self showTargetView:targetView CanHide:NO ClickBackGroundHideBlock:nil];
+    [self showTargetView:targetView CanHide:YES ClickBackGroundHideBlock:nil];
 }
 -(void)willMoveToWindow:(UIWindow *)newWindow
 {

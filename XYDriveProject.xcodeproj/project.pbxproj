@@ -70,6 +70,12 @@
 		23A36EEB202ADD0E00F1C730 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A36EEA202ADD0E00F1C730 /* libsqlite3.tbd */; };
 		23A36EED202ADD1E00F1C730 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A36EEC202ADD1E00F1C730 /* libicucore.tbd */; };
 		23A36EFD202C3B9400F1C730 /* XYUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A36EFC202C3B9400F1C730 /* XYUserModel.m */; };
+		23B6B6FC2063771C00C76CA0 /* TGCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B6B6FB2063771C00C76CA0 /* TGCoverView.m */; };
+		23B6B7002063847D00C76CA0 /* UILoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B6B6FF2063847D00C76CA0 /* UILoading.m */; };
+		23B6B704206384A800C76CA0 /* UIToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B6B703206384A800C76CA0 /* UIToast.m */; };
+		23B6B70C2063870600C76CA0 /* NSMutableAttributedString+NumColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B6B7062063870300C76CA0 /* NSMutableAttributedString+NumColor.m */; };
+		23B6B70D2063870600C76CA0 /* NSString+LSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B6B7072063870400C76CA0 /* NSString+LSExtension.m */; };
+		23B6B70E2063870600C76CA0 /* NSString+Number.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B6B70B2063870600C76CA0 /* NSString+Number.m */; };
 		23C0614B204CE69700F6153E /* XYCustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C0614A204CE69700F6153E /* XYCustomCalloutView.m */; };
 		23C0614E204CE7C300F6153E /* XYCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C0614D204CE7C300F6153E /* XYCustomAnnotationView.m */; };
 		23C06152204CEB5800F6153E /* AnnotatationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C06151204CEB5800F6153E /* AnnotatationModel.m */; };
@@ -222,6 +228,18 @@
 		23A36EFB202C3B9400F1C730 /* XYUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYUserModel.h; sourceTree = "<group>"; };
 		23A36EFC202C3B9400F1C730 /* XYUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYUserModel.m; sourceTree = "<group>"; };
 		23A36F01202C410500F1C730 /* Local.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Local.h; sourceTree = "<group>"; };
+		23B6B6FA2063771C00C76CA0 /* TGCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGCoverView.h; sourceTree = "<group>"; };
+		23B6B6FB2063771C00C76CA0 /* TGCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGCoverView.m; sourceTree = "<group>"; };
+		23B6B6FE2063847C00C76CA0 /* UILoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILoading.h; sourceTree = "<group>"; };
+		23B6B6FF2063847D00C76CA0 /* UILoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILoading.m; sourceTree = "<group>"; };
+		23B6B702206384A800C76CA0 /* UIToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIToast.h; sourceTree = "<group>"; };
+		23B6B703206384A800C76CA0 /* UIToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIToast.m; sourceTree = "<group>"; };
+		23B6B7062063870300C76CA0 /* NSMutableAttributedString+NumColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+NumColor.m"; sourceTree = "<group>"; };
+		23B6B7072063870400C76CA0 /* NSString+LSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LSExtension.m"; sourceTree = "<group>"; };
+		23B6B7082063870400C76CA0 /* NSString+LSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LSExtension.h"; sourceTree = "<group>"; };
+		23B6B7092063870500C76CA0 /* NSString+Number.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Number.h"; sourceTree = "<group>"; };
+		23B6B70A2063870600C76CA0 /* NSMutableAttributedString+NumColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+NumColor.h"; sourceTree = "<group>"; };
+		23B6B70B2063870600C76CA0 /* NSString+Number.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Number.m"; sourceTree = "<group>"; };
 		23C06149204CE69700F6153E /* XYCustomCalloutView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCustomCalloutView.h; sourceTree = "<group>"; };
 		23C0614A204CE69700F6153E /* XYCustomCalloutView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCustomCalloutView.m; sourceTree = "<group>"; };
 		23C0614C204CE7C300F6153E /* XYCustomAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYCustomAnnotationView.h; sourceTree = "<group>"; };
@@ -629,6 +647,8 @@
 		238BB25C20493D310072F2C3 /* AddAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				23B6B6FA2063771C00C76CA0 /* TGCoverView.h */,
+				23B6B6FB2063771C00C76CA0 /* TGCoverView.m */,
 				238BB25D20493D590072F2C3 /* AddNameAlertView.h */,
 				238BB25E20493D590072F2C3 /* AddNameAlertView.m */,
 				238BB26020493D690072F2C3 /* AddNameAlertView.xib */,
@@ -662,6 +682,12 @@
 		23A36DF9202810F000F1C730 /* NSString */ = {
 			isa = PBXGroup;
 			children = (
+				23B6B70A2063870600C76CA0 /* NSMutableAttributedString+NumColor.h */,
+				23B6B7062063870300C76CA0 /* NSMutableAttributedString+NumColor.m */,
+				23B6B7082063870400C76CA0 /* NSString+LSExtension.h */,
+				23B6B7072063870400C76CA0 /* NSString+LSExtension.m */,
+				23B6B7092063870500C76CA0 /* NSString+Number.h */,
+				23B6B70B2063870600C76CA0 /* NSString+Number.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -767,6 +793,8 @@
 		23A36E162028464700F1C730 /* FunctionView */ = {
 			isa = PBXGroup;
 			children = (
+				23B6B7012063849100C76CA0 /* UIToast */,
+				23B6B6FD2063846400C76CA0 /* Loading */,
 				238BB24F20478FC40072F2C3 /* 透明背景 */,
 			);
 			path = FunctionView;
@@ -898,6 +926,24 @@
 				23A36EFC202C3B9400F1C730 /* XYUserModel.m */,
 			);
 			path = UserModel;
+			sourceTree = "<group>";
+		};
+		23B6B6FD2063846400C76CA0 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				23B6B6FE2063847C00C76CA0 /* UILoading.h */,
+				23B6B6FF2063847D00C76CA0 /* UILoading.m */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		23B6B7012063849100C76CA0 /* UIToast */ = {
+			isa = PBXGroup;
+			children = (
+				23B6B702206384A800C76CA0 /* UIToast.h */,
+				23B6B703206384A800C76CA0 /* UIToast.m */,
+			);
+			path = UIToast;
 			sourceTree = "<group>";
 		};
 		23C0614F204CEB0F00F6153E /* MapModel */ = {
@@ -1073,6 +1119,7 @@
 				"${PODS_ROOT}/DateTools/DateTools/DateTools/DateTools.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1082,6 +1129,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/DateTools.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PGDatePicker.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1140,14 +1188,18 @@
 				23A36EDD202ACA7B00F1C730 /* HttpManager.m in Sources */,
 				234692FD2022E619007DE6F4 /* XYHomeViewController.m in Sources */,
 				2322B8BD204B9D2C0095DA01 /* CommonUtility.m in Sources */,
+				23B6B70D2063870600C76CA0 /* NSString+LSExtension.m in Sources */,
 				2322B8BF204B9D2C0095DA01 /* MANaviPolyline.m in Sources */,
 				235003A22050DE0A00DC02EF /* XYCustomAnnotation.m in Sources */,
 				234693022022FAB7007DE6F4 /* XYLoginViewController.m in Sources */,
+				23B6B704206384A800C76CA0 /* UIToast.m in Sources */,
 				23C0614B204CE69700F6153E /* XYCustomCalloutView.m in Sources */,
+				23B6B70C2063870600C76CA0 /* NSMutableAttributedString+NumColor.m in Sources */,
 				234692F72022E53A007DE6F4 /* XYBaseViewController.m in Sources */,
 				2347CEEA204E21B70091DD09 /* testObject.m in Sources */,
 				234693182023059E007DE6F4 /* UIColor+helper.m in Sources */,
 				23A36E422029888500F1C730 /* XYDateSlecteView.m in Sources */,
+				23B6B70E2063870600C76CA0 /* NSString+Number.m in Sources */,
 				23500396204FCB0E00DC02EF /* DriveNaviViewController.m in Sources */,
 				238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */,
 				2322B8C0204B9D2C0095DA01 /* MANaviRoute.m in Sources */,
@@ -1173,6 +1225,8 @@
 				23500381204F77D500DC02EF /* SelectableOverlay.m in Sources */,
 				2350039E2050CF5000DC02EF /* SetTripRoudeViewController.m in Sources */,
 				2322B8B1204B9C910095DA01 /* SHMapSearchManager.m in Sources */,
+				23B6B7002063847D00C76CA0 /* UILoading.m in Sources */,
+				23B6B6FC2063771C00C76CA0 /* TGCoverView.m in Sources */,
 				23C0614E204CE7C300F6153E /* XYCustomAnnotationView.m in Sources */,
 				23A36EE5202AD76B00F1C730 /* XYRespons.m in Sources */,
 			);

@@ -20,4 +20,5 @@ pod 'JTCalendar', '~> 2.0'
 pod 'AVOSCloud'
 pod 'AVOSCloudIM'
 pod 'DateTools'
+pod 'PGDatePicker'
 end
