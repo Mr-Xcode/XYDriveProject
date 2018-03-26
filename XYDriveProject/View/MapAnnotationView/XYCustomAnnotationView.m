@@ -7,6 +7,7 @@
 //
 
 #import "XYCustomAnnotationView.h"
+#import "XYCustomAnnotation.h"
 #define kCalloutWidth       200.0
 #define kCalloutHeight      70.0
 @interface XYCustomAnnotationView ()
@@ -32,6 +33,14 @@
     {
         return;
     }
+//    if (self.annotation) {
+//        XYCustomAnnotation * xyAnnotation =(XYCustomAnnotation *)self.annotation;
+//        if (xyAnnotation.anType ==isDefault) {
+//            self.canShowCallout =YES;
+//            [super setSelected:selected animated:animated];
+//            return;
+//        }
+//    }
     
     if (selected)
     {

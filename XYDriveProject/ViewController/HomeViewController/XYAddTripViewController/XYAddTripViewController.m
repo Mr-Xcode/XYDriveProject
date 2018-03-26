@@ -178,12 +178,13 @@
         self.driveManager.delegate =self;
     }
 }
-- (void)addAnntationViewLat:(CGFloat)lat Lng:(CGFloat)lng{
+- (void)addAnntationViewLat:(CGFloat)lat Lng:(CGFloat)lng AnnotationType:(AnnotationType)type{
     self.addAnnotation =nil;
     XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
     pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, lng);
     pointAnnotation.title = @"";
     pointAnnotation.subtitle = @"";
+    pointAnnotation.anType =type;
     self.addAnnotation =pointAnnotation;
 }
 #pragma mark - MAP delegate
@@ -216,8 +217,16 @@
             annotationView = [[XYCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
         annotationView.image = [UIImage imageNamed:@"icon_location"];
-        // 设置为NO，用以调用自定义的calloutView
-        annotationView.canShowCallout = NO;
+        
+        if (xyAnnotation.anType ==isAdd) {
+            // 设置为NO，用以调用自定义的calloutView
+            annotationView.canShowCallout = NO;
+            annotationView.selected =YES;
+        }else{
+            // 设置为NO，用以调用自定义的calloutView
+            annotationView.canShowCallout = YES;
+            annotationView.enabled =NO;
+        }
         annotationView.model =xyAnnotation.model;
         
         // 设置中心点偏移，使得标注底部中间点成为经纬度对应点
@@ -229,7 +238,7 @@
 //长按地图添加标注
 - (void)mapView:(MAMapView *)mapView didLongPressedAtCoordinate:(CLLocationCoordinate2D)coordinate{
     [self.searchManager startSearchCityWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude];
+    [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude AnnotationType:isAdd];
 }
 #pragma mark - 让大头针不跟着地图滑动，时时显示在地图最中间
 - (void)mapViewRegionChanged:(MAMapView *)mapView {
@@ -293,6 +302,7 @@
             pointAnnotation.coordinate = coor;
             pointAnnotation.title = marker.attributes.city;
             pointAnnotation.subtitle =marker.title;
+            pointAnnotation.anType =isDefault;
             [self.markersAnnotationArray addObject:pointAnnotation];
             
             pointAnnotation.model =marker;
@@ -310,6 +320,8 @@
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"添加" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"OK Action");
+            SetTripRoudeViewController * setVC =[[SetTripRoudeViewController alloc]init];
+            [self.navigationController pushViewController:setVC animated:YES];
         }];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"让我想想" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"Cancel Action");

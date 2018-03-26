@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JTCalendar/JTCalendar.h>
 
 @interface XYDateSlecteView : UIView
-
+@property (strong, nonatomic) JTCalendarManager *calendarManager;
+- (void)toNextDay;
 @end

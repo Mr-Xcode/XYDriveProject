@@ -47,6 +47,11 @@
 		238BB2592047C5A50072F2C3 /* XYTimeTripView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238BB2582047C5A50072F2C3 /* XYTimeTripView.m */; };
 		238BB25F20493D590072F2C3 /* AddNameAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238BB25E20493D590072F2C3 /* AddNameAlertView.m */; };
 		238BB26120493D690072F2C3 /* AddNameAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 238BB26020493D690072F2C3 /* AddNameAlertView.xib */; };
+		239B114F206892CE0071C4AA /* XYSearchPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239B114D206892CE0071C4AA /* XYSearchPlaceViewController.m */; };
+		239B1150206892CE0071C4AA /* XYSearchPlaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 239B114E206892CE0071C4AA /* XYSearchPlaceViewController.xib */; };
+		239B11542068935C0071C4AA /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239B11532068935C0071C4AA /* AddressViewController.m */; };
+		239B11562068938F0071C4AA /* address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 239B11552068938F0071C4AA /* address.plist */; };
+		239B11592068D63A0071C4AA /* XYScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 239B11582068D63A0071C4AA /* XYScrollView.m */; };
 		23A36E0A202830B300F1C730 /* SHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A36E09202830B300F1C730 /* SHButton.m */; };
 		23A36E0F202832F000F1C730 /* WriteLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A36E0E202832F000F1C730 /* WriteLog.m */; };
 		23A36E1420283E5500F1C730 /* XYRegiestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A36E1220283E5500F1C730 /* XYRegiestViewController.m */; };
@@ -179,6 +184,14 @@
 		238BB25D20493D590072F2C3 /* AddNameAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddNameAlertView.h; sourceTree = "<group>"; };
 		238BB25E20493D590072F2C3 /* AddNameAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddNameAlertView.m; sourceTree = "<group>"; };
 		238BB26020493D690072F2C3 /* AddNameAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNameAlertView.xib; sourceTree = "<group>"; };
+		239B114C206892CE0071C4AA /* XYSearchPlaceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYSearchPlaceViewController.h; sourceTree = "<group>"; };
+		239B114D206892CE0071C4AA /* XYSearchPlaceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYSearchPlaceViewController.m; sourceTree = "<group>"; };
+		239B114E206892CE0071C4AA /* XYSearchPlaceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XYSearchPlaceViewController.xib; sourceTree = "<group>"; };
+		239B11522068935C0071C4AA /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
+		239B11532068935C0071C4AA /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
+		239B11552068938F0071C4AA /* address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = address.plist; sourceTree = "<group>"; };
+		239B11572068D63A0071C4AA /* XYScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYScrollView.h; sourceTree = "<group>"; };
+		239B11582068D63A0071C4AA /* XYScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYScrollView.m; sourceTree = "<group>"; };
 		23A36DF120280C1000F1C730 /* APPKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APPKey.h; sourceTree = "<group>"; };
 		23A36DF220280D8500F1C730 /* NotificationSetDfine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationSetDfine.h; sourceTree = "<group>"; };
 		23A36DF420280F2100F1C730 /* XYSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYSize.h; sourceTree = "<group>"; };
@@ -527,6 +540,7 @@
 		234692EE2022E4AD007DE6F4 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				239B1151206892F70071C4AA /* city */,
 				237DF42B205374720016459E /* BFDragGestureRecognizer */,
 				23A36E3B20295C5E00F1C730 /* Transition */,
 			);
@@ -654,6 +668,26 @@
 				238BB26020493D690072F2C3 /* AddNameAlertView.xib */,
 			);
 			path = AddAlertView;
+			sourceTree = "<group>";
+		};
+		239B114B206892730071C4AA /* 搜索地点 */ = {
+			isa = PBXGroup;
+			children = (
+				239B114C206892CE0071C4AA /* XYSearchPlaceViewController.h */,
+				239B114D206892CE0071C4AA /* XYSearchPlaceViewController.m */,
+				239B114E206892CE0071C4AA /* XYSearchPlaceViewController.xib */,
+			);
+			path = "搜索地点";
+			sourceTree = "<group>";
+		};
+		239B1151206892F70071C4AA /* city */ = {
+			isa = PBXGroup;
+			children = (
+				239B11522068935C0071C4AA /* AddressViewController.h */,
+				239B11532068935C0071C4AA /* AddressViewController.m */,
+				239B11552068938F0071C4AA /* address.plist */,
+			);
+			path = city;
 			sourceTree = "<group>";
 		};
 		23A36DF6202810F000F1C730 /* NSObject */ = {
@@ -863,6 +897,7 @@
 				2350039B2050CF5000DC02EF /* SetTripRoudeViewController.h */,
 				2350039C2050CF5000DC02EF /* SetTripRoudeViewController.m */,
 				2350039D2050CF5000DC02EF /* SetTripRoudeViewController.xib */,
+				239B114B206892730071C4AA /* 搜索地点 */,
 			);
 			path = XYAddTripViewController;
 			sourceTree = "<group>";
@@ -893,6 +928,8 @@
 				238BB2582047C5A50072F2C3 /* XYTimeTripView.m */,
 				237DF42F2053CAF70016459E /* FloatingView.h */,
 				237DF4302053CAF70016459E /* FloatingView.m */,
+				239B11572068D63A0071C4AA /* XYScrollView.h */,
+				239B11582068D63A0071C4AA /* XYScrollView.m */,
 			);
 			path = XYAddTripView;
 			sourceTree = "<group>";
@@ -1080,9 +1117,11 @@
 				23500383204F7DE000DC02EF /* trackDirection.png in Resources */,
 				238BB26120493D690072F2C3 /* AddNameAlertView.xib in Resources */,
 				234692BA202193DB007DE6F4 /* LaunchScreen.storyboard in Resources */,
+				239B1150206892CE0071C4AA /* XYSearchPlaceViewController.xib in Resources */,
 				234692B7202193DB007DE6F4 /* Assets.xcassets in Resources */,
 				234692B5202193DB007DE6F4 /* Main.storyboard in Resources */,
 				234693032022FAB7007DE6F4 /* XYLoginViewController.xib in Resources */,
+				239B11562068938F0071C4AA /* address.plist in Resources */,
 				238BB25520479CC80072F2C3 /* icon_location@3x.png in Resources */,
 				23A36E2C2028569000F1C730 /* bc.png in Resources */,
 				23A36E2A20284E7F00F1C730 /* XYMenuView.xib in Resources */,
@@ -1199,10 +1238,12 @@
 				2347CEEA204E21B70091DD09 /* testObject.m in Sources */,
 				234693182023059E007DE6F4 /* UIColor+helper.m in Sources */,
 				23A36E422029888500F1C730 /* XYDateSlecteView.m in Sources */,
+				239B114F206892CE0071C4AA /* XYSearchPlaceViewController.m in Sources */,
 				23B6B70E2063870600C76CA0 /* NSString+Number.m in Sources */,
 				23500396204FCB0E00DC02EF /* DriveNaviViewController.m in Sources */,
 				238BB25220478FF50072F2C3 /* XYCoverView.m in Sources */,
 				2322B8C0204B9D2C0095DA01 /* MANaviRoute.m in Sources */,
+				239B11592068D63A0071C4AA /* XYScrollView.m in Sources */,
 				23A36E20202846D600F1C730 /* TripCell.m in Sources */,
 				234693172023059E007DE6F4 /* UIColor+Extension.m in Sources */,
 				23A36E1420283E5500F1C730 /* XYRegiestViewController.m in Sources */,
@@ -1222,6 +1263,7 @@
 				23C06152204CEB5800F6153E /* AnnotatationModel.m in Sources */,
 				237DF4312053CAF70016459E /* FloatingView.m in Sources */,
 				23A36E2520284C9200F1C730 /* UIBarButtonItem+ImageTitle.m in Sources */,
+				239B11542068935C0071C4AA /* AddressViewController.m in Sources */,
 				23500381204F77D500DC02EF /* SelectableOverlay.m in Sources */,
 				2350039E2050CF5000DC02EF /* SetTripRoudeViewController.m in Sources */,
 				2322B8B1204B9C910095DA01 /* SHMapSearchManager.m in Sources */,

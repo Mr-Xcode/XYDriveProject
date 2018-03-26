@@ -9,12 +9,14 @@
 #import "SetTripRoudeViewController.h"
 #import <PGDatePicker/PGDatePickManager.h>
 #import "NSDate+PGCategory.h"
+#import "XYSearchPlaceViewController.h"
 @interface SetTripRoudeViewController ()<PGDatePickerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
 @property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endBtn;
 @property (weak, nonatomic) IBOutlet UITextView *describeTextView;
+@property (weak, nonatomic) IBOutlet UIButton *searchButton;
 
 @end
 
@@ -36,7 +38,13 @@
     [self.startBtn setTitle:self.model.start forState:UIControlStateNormal];
     [self.endBtn setTitle:self.model.end forState:UIControlStateNormal];
 }
+- (IBAction)searchButtonClick:(id)sender {
+    XYSearchPlaceViewController * searchVC =[[XYSearchPlaceViewController alloc]init];
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
 - (IBAction)searchBtnClick:(id)sender {
+    XYSearchPlaceViewController * searchVC =[[XYSearchPlaceViewController alloc]init];
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 - (IBAction)startBtnClick:(id)sender {
     [self showTimeAlert];

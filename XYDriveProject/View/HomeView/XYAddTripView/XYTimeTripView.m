@@ -12,7 +12,6 @@
 @interface XYTimeTripView ()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) UIView *bcView;
-@property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic, assign) CGFloat pressViewWidth;
 @property (nonatomic, strong) NSMutableArray * addViews;
 @property (nonatomic, weak) UIView * moveView;
@@ -22,6 +21,25 @@
 @property (nonatomic, strong) NSDate * startDate;
 @property (nonatomic, strong) NSDate * endDate;
 @property (nonatomic,strong) NSArray * markers;
+/**
+ *  保存可见的视图
+ */
+@property (nonatomic, strong) NSMutableArray *visibleImageViews;
+
+/**
+ *  保存可重用的
+ */
+@property (nonatomic, strong) NSMutableArray *reusedImageViews;
+
+/**
+ *  滚动视图
+ */
+@property (nonatomic, weak) UIScrollView *scrollView;
+
+/**
+ *  所有的图片名
+ */
+@property (nonatomic, strong) NSArray *imageNames;
 @end
 
 @implementation XYTimeTripView
@@ -45,24 +63,24 @@
     self.addViews =[NSMutableArray array];
     [self addSubview:self.dateSelView];
     [self addSubview:self.topTapView];
-    UIScrollView * scrollV =[[UIScrollView alloc]init];
-    scrollV.frame =CGRectMake(0, CGRectGetMaxY(self.dateSelView.frame), SCREEN_W, self.bounds.size.height-self.dateSelView.bounds.size.height-TOPGestureViewH);
-//    scrollV.pagingEnabled=YES;
-    scrollV.bounces =NO;
-    scrollV.backgroundColor =[UIColor whiteColor];
-    [self addSubview:scrollV];
-    self.scrollView =scrollV;
-    [self addGesture];
-    
-    UIView * temp =[self getGridView];
-    [self.scrollView addSubview:temp];
-    self.scrollView.contentSize =CGSizeMake(SCREEN_W, temp.height+15);
-    
-    NSInteger hourPoint =3;
-    NSInteger time =78;//假设为分钟
-    
-    
-    [self pressAddView:CGPointMake(LEFTMargin, hourPoint * HOURHEIGHT) height:time];
+    [self setupScrollView];
+//    UIScrollView * scrollV =[[UIScrollView alloc]init];
+//    scrollV.frame =CGRectMake(0, CGRectGetMaxY(self.dateSelView.frame), SCREEN_W, self.bounds.size.height-self.dateSelView.bounds.size.height-TOPGestureViewH);
+//    scrollV.bounces =NO;
+//    scrollV.backgroundColor =[UIColor whiteColor];
+//    [self addSubview:scrollV];
+//    self.scrollView =scrollV;
+//    [self addGesture];
+//
+//    UIView * temp =[self getGridView];
+//    [self.scrollView addSubview:temp];
+//    self.scrollView.contentSize =CGSizeMake(SCREEN_W, temp.height+15);
+//
+//    NSInteger hourPoint =3;
+//    NSInteger time =78;//假设为分钟
+//
+//
+//    [self pressAddView:CGPointMake(LEFTMargin, hourPoint * HOURHEIGHT) height:time];
     
 }
 - (UIView *)topTapView{
@@ -107,6 +125,24 @@
     }
     return _adView;
 }
+#pragma mark - <UISCrollView>
+// 添加UIScrollView
+- (void)setupScrollView {
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.dateSelView.frame), SCREEN_W, self.bounds.size.height-self.dateSelView.bounds.size.height-TOPGestureViewH)];
+    scrollView.pagingEnabled = YES;
+    scrollView.delegate = self;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.backgroundColor =[UIColor whiteColor];
+    scrollView.bounces =NO;
+    [self addSubview:scrollView];
+    self.scrollView = scrollView;
+
+    UIView * temp =[self getGridView];
+    [self.scrollView addSubview:temp];
+    scrollView.contentSize = CGSizeMake(SCREEN_W*1, temp.frame.size.height+15);
+}
+
 - (UIView *)getGridView{
     UIView * view =[[UIView alloc]init];
     CGFloat totalHeight =0;
@@ -151,6 +187,11 @@
     [self.scrollView addSubview:tempView];
     self.moveView =tempView;
     [self.addViews addObject:tempView];
+    
+    UIButton * button =[UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame =tempView.bounds;
+    [button addTarget:self action:@selector(jumpNextDay) forControlEvents:UIControlEventTouchUpInside];
+    [tempView addSubview:button];
     
     
     UILongPressGestureRecognizer *longPressGest = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressView:)];
@@ -264,6 +305,9 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.frame =CGRectMake(0, CGRectGetMaxY(self.superview.frame)-TIMEVIEWHEIGHT-64, SCREEN_W, self.bounds.size.height);
     }];
+}
+- (void)jumpNextDay{
+    [self.dateSelView toNextDay];
 }
 
 /**

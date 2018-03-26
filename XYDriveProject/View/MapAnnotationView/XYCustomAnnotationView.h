@@ -9,7 +9,6 @@
 #import <MAMapKit/MAMapKit.h>
 #import "XYCustomCalloutView.h"
 #import "AnnotatationModel.h"
-
 @interface XYCustomAnnotationView : MAAnnotationView
 @property (nonatomic, readonly) XYCustomCalloutView *calloutView;
 //@property (nonatomic, strong) AnnotatationModel * model;

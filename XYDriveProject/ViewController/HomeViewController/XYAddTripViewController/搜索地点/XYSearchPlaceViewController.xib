@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XYSearchPlaceViewController">
+            <connections>
+                <outlet property="areaButton" destination="mVV-Dn-Tal" id="SWf-LQ-ipe"/>
+                <outlet property="cityButton" destination="zFV-wP-fSs" id="e8s-y6-lLa"/>
+                <outlet property="mapBcView" destination="LLJ-XU-uoG" id="JBb-kM-5Y1"/>
+                <outlet property="nextPageButton" destination="2q9-rh-dja" id="uZ2-M8-vhI"/>
+                <outlet property="onPageButton" destination="IIv-Ng-7hf" id="kIM-h1-KXs"/>
+                <outlet property="searchBar" destination="feo-AV-WX2" id="JUr-Wz-fvg"/>
+                <outlet property="searchDisplayController" destination="gSH-3T-TIk" id="LZt-a8-w6h"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGw-vF-ToO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFV-wP-fSs">
+                            <rect key="frame" x="5" y="5" width="100" height="40"/>
+                            <color key="backgroundColor" red="0.15943149785622468" green="0.49016832012346045" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="3Hd-7f-BpS"/>
+                                <constraint firstAttribute="width" constant="100" id="vP6-dG-8xU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="北京市">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="cityButtonClick:" destination="-1" eventType="touchUpInside" id="rWb-vx-7Gv"/>
+                            </connections>
+                        </button>
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="请输入关键字" translatesAutoresizingMaskIntoConstraints="NO" id="feo-AV-WX2">
+                            <rect key="frame" x="112" y="-3" width="258" height="56"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                        </searchBar>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVV-Dn-Tal">
+                            <rect key="frame" x="5" y="55" width="187.5" height="40"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <state key="normal" title="在此区域搜索"/>
+                            <connections>
+                                <action selector="areaButtonClick:" destination="-1" eventType="touchUpInside" id="bF5-sZ-a7H"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IIv-Ng-7hf">
+                            <rect key="frame" x="197.5" y="60.5" width="79" height="29"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="上一页"/>
+                            <connections>
+                                <action selector="onPageButtonClick:" destination="-1" eventType="touchUpInside" id="vty-e9-zzs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2q9-rh-dja">
+                            <rect key="frame" x="281.5" y="60" width="88.5" height="29"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <state key="normal" title="下一页"/>
+                            <connections>
+                                <action selector="nextPageButtonClick:" destination="-1" eventType="touchUpInside" id="UfA-Cg-Bon"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="mVV-Dn-Tal" firstAttribute="top" secondItem="zFV-wP-fSs" secondAttribute="bottom" constant="10" id="9S4-pG-0nR"/>
+                        <constraint firstAttribute="height" constant="100" id="9cq-vw-xIg"/>
+                        <constraint firstItem="2q9-rh-dja" firstAttribute="centerY" secondItem="IIv-Ng-7hf" secondAttribute="centerY" id="AFv-PJ-Z9m"/>
+                        <constraint firstItem="zFV-wP-fSs" firstAttribute="top" secondItem="JGw-vF-ToO" secondAttribute="top" constant="5" id="C28-Rg-JfM"/>
+                        <constraint firstItem="feo-AV-WX2" firstAttribute="centerY" secondItem="zFV-wP-fSs" secondAttribute="centerY" id="EwA-ok-pnB"/>
+                        <constraint firstItem="mVV-Dn-Tal" firstAttribute="width" secondItem="JGw-vF-ToO" secondAttribute="width" multiplier="0.5" id="F0A-A0-zdi"/>
+                        <constraint firstAttribute="bottom" secondItem="mVV-Dn-Tal" secondAttribute="bottom" constant="5" id="Oik-o6-Esj"/>
+                        <constraint firstItem="feo-AV-WX2" firstAttribute="leading" secondItem="zFV-wP-fSs" secondAttribute="trailing" constant="7" id="QBe-rD-63W"/>
+                        <constraint firstItem="mVV-Dn-Tal" firstAttribute="leading" secondItem="zFV-wP-fSs" secondAttribute="leading" id="Quv-g8-TDk"/>
+                        <constraint firstAttribute="trailing" secondItem="2q9-rh-dja" secondAttribute="trailing" constant="5" id="bzH-BF-fUe"/>
+                        <constraint firstItem="IIv-Ng-7hf" firstAttribute="leading" secondItem="mVV-Dn-Tal" secondAttribute="trailing" constant="5" id="jQw-dt-8YG"/>
+                        <constraint firstItem="2q9-rh-dja" firstAttribute="leading" secondItem="IIv-Ng-7hf" secondAttribute="trailing" constant="5" id="kOx-LW-uwy"/>
+                        <constraint firstItem="IIv-Ng-7hf" firstAttribute="width" secondItem="mVV-Dn-Tal" secondAttribute="width" multiplier="0.5" constant="-15" id="lfB-R2-MRm"/>
+                        <constraint firstAttribute="trailing" secondItem="feo-AV-WX2" secondAttribute="trailing" constant="5" id="mNx-ak-bJI"/>
+                        <constraint firstItem="zFV-wP-fSs" firstAttribute="leading" secondItem="JGw-vF-ToO" secondAttribute="leading" constant="5" id="sdf-hp-IBy"/>
+                        <constraint firstItem="IIv-Ng-7hf" firstAttribute="centerY" secondItem="mVV-Dn-Tal" secondAttribute="centerY" id="y1M-MH-B8N"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLJ-XU-uoG">
+                    <rect key="frame" x="0.0" y="100" width="375" height="567"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="JGw-vF-ToO" secondAttribute="trailing" id="9bb-v1-WcQ"/>
+                <constraint firstAttribute="trailing" secondItem="LLJ-XU-uoG" secondAttribute="trailing" id="Fp9-hP-6qM"/>
+                <constraint firstItem="JGw-vF-ToO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ioo-Pj-dJM"/>
+                <constraint firstItem="JGw-vF-ToO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vm7-bh-eoC"/>
+                <constraint firstItem="LLJ-XU-uoG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dIU-PC-JFM"/>
+                <constraint firstAttribute="bottom" secondItem="LLJ-XU-uoG" secondAttribute="bottom" id="vxS-21-YeG"/>
+                <constraint firstItem="LLJ-XU-uoG" firstAttribute="top" secondItem="JGw-vF-ToO" secondAttribute="bottom" id="y0Y-bj-FCF"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+        <searchDisplayController id="gSH-3T-TIk">
+            <connections>
+                <outlet property="delegate" destination="-1" id="3HR-Qc-89M"/>
+                <outlet property="searchContentsController" destination="-1" id="Ho7-bh-BWO"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="9cn-Ba-tCO"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="6IF-za-kcH"/>
+            </connections>
+        </searchDisplayController>
+    </objects>
+</document>

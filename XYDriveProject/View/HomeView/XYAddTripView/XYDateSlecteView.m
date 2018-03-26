@@ -7,7 +7,6 @@
 //
 
 #import "XYDateSlecteView.h"
-#import <JTCalendar/JTCalendar.h>
 
 @interface XYDateSlecteView() <JTCalendarDelegate>{
     NSMutableDictionary *_eventsByDate;
@@ -20,8 +19,6 @@
 }
 @property (nonatomic, strong)JTCalendarMenuView *calendarMenuView;
 @property (nonatomic, strong)JTHorizontalCalendarView *calendarContentView;
-
-@property (strong, nonatomic) JTCalendarManager *calendarManager;
 
 @end
 
@@ -70,6 +67,11 @@
     [_calendarManager setMenuView:self.calendarMenuView];
     [_calendarManager setContentView:self.calendarContentView];
     [_calendarManager setDate:[NSDate date]];
+}
+- (void)toNextDay{
+    NSDate* newDate =  [_calendarManager.date dateByAddingTimeInterval:60*60*24];
+        _dateSelected = newDate;
+    [_calendarManager setDate:newDate];
 }
 #pragma mark - CalendarManager delegate
 
@@ -215,4 +217,6 @@
         [_eventsByDate[key] addObject:randomDate];
     }
 }
+
+
 @end
