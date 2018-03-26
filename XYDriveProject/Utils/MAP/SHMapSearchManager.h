@@ -12,7 +12,9 @@
 #import <MAMapKit/MAMapKit.h>
 typedef void(^SHAMAPSearchManagerRouteSuccess)(NSArray *polylines);
 typedef void(^SHAMAPSearchManagerCitySuccess)(NSString *city,NSString *cityCode,NSString*formattedAddress);
+typedef void(^SHAMAPGeoSearchSuccess)(AMapGeocodeSearchResponse *response);
 typedef void(^SHAMAPSearchManagerFailure)(NSString *error);
+
 
 @interface SHMapSearchManager : NSObject
 
@@ -26,8 +28,7 @@ typedef void(^SHAMAPSearchManagerFailure)(NSString *error);
 //驾车路线
 -(void)startSearchDriveRouteWithStartLongitude:(CGFloat)startLongitude startLatitude:(CGFloat)startLatitude endLongitude:(CGFloat)endLongitude endLatitude:(CGFloat)endLatitude waypointsArray:(NSArray<AMapGeoPoint *>*)waypoints;
 
-@property (nonatomic,copy) SHAMAPSearchManagerRouteSuccess routeBlock;
-@property (nonatomic,copy) SHAMAPSearchManagerCitySuccess cityBlock;
-@property (nonatomic,copy) SHAMAPSearchManagerFailure failureBlock;
+//地理编码
+- (void)aMapGeocodeSearch:(NSString *)city block:(SHAMAPGeoSearchSuccess)block failure:(SHAMAPSearchManagerFailure)failure;
 
 @end

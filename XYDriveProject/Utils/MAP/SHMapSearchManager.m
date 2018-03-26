@@ -25,6 +25,11 @@
 @property (nonatomic,strong) AMapRouteSearchBaseRequest *lastRequest;
 
 @property (nonatomic, strong) NSMutableArray * polylines;
+
+@property (nonatomic,copy) SHAMAPSearchManagerRouteSuccess routeBlock;
+@property (nonatomic,copy) SHAMAPSearchManagerCitySuccess cityBlock;
+@property (nonatomic,copy) SHAMAPSearchManagerFailure failureBlock;
+@property (nonatomic,copy) SHAMAPGeoSearchSuccess geoSuccess;
 @end
 
 @implementation SHMapSearchManager
@@ -38,25 +43,17 @@
         self.search.delegate = self;
 //         [[AMapNaviDriveManager sharedInstance] setDelegate:self];
 //        self.polylines =[NSMutableArray array];
+        
     }
     return self;
 }
+#pragma mark - <路径规划>
 -(void)startSearchCityWithLatitude:(CGFloat)latitude longitude:(CGFloat)longitude
 {
     AMapReGeocodeSearchRequest *request=[[AMapReGeocodeSearchRequest alloc]init];
     AMapGeoPoint *location=[AMapGeoPoint locationWithLatitude:latitude longitude:longitude];
     request.location=location;
     [self.search AMapReGoecodeSearch:request];
-}
-
-
--(void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
-{
-    DLog(@"反地理编码结果：%@",response);
-    NSString *city= response.regeocode.addressComponent.city;
-    if (self.cityBlock) {
-        self.cityBlock(city,response.regeocode.addressComponent.citycode,response.regeocode.formattedAddress);
-    }
 }
 
 //步行
@@ -93,15 +90,37 @@
     self.lastRequest=navi;
 
     [self.search AMapDrivingRouteSearch:navi];
-//    [self initProperties];
-    
-//    AMapNaviPoint * start = [AMapNaviPoint locationWithLatitude:startLatitude longitude:startLongitude];
-//    AMapNaviPoint * end  = [AMapNaviPoint locationWithLatitude:endLatitude longitude:endLongitude];
-//    
-//    [[AMapNaviDriveManager sharedInstance] calculateDriveRouteWithStartPoints:@[start]
-//                                                                    endPoints:@[end]
-//                                                                    wayPoints:nil
-//                                                              drivingStrategy:2];
+}
+#pragma mark - <AMapGeocodeSearchRequest>
+- (void)aMapGeocodeSearch:(NSString *)city block:(SHAMAPGeoSearchSuccess)block failure:(SHAMAPSearchManagerFailure)failure{
+    AMapGeocodeSearchRequest * crequest =[[AMapGeocodeSearchRequest alloc]init];
+    crequest.address =city;
+    crequest.city =city;
+    [self.search AMapGeocodeSearch:crequest];
+    self.geoSuccess = ^(AMapGeocodeSearchResponse *response) {
+        if (block) {
+            block(response);
+        }
+    };
+    self.failureBlock = ^(NSString *error) {
+        if (failure) {
+            failure(error);
+        }
+    };
+}
+#pragma mark - <AMapGeoDelegate>
+- (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response{
+    if (self.geoSuccess) {
+        self.geoSuccess(response);
+    }
+}
+-(void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    DLog(@"反地理编码结果：%@",response);
+    NSString *city= response.regeocode.addressComponent.city;
+    if (self.cityBlock) {
+        self.cityBlock(city,response.regeocode.addressComponent.citycode,response.regeocode.formattedAddress);
+    }
 }
 - (void)initProperties
 {
@@ -128,6 +147,7 @@
     }
 }
 
+#pragma mark - <计算处理>
 - (void)showNaviRoutes
 {
     if ([[AMapNaviDriveManager sharedInstance].naviRoutes count] <= 0)
@@ -165,16 +185,6 @@
     }
     
 }
-
-
-
-
-
-
-
-
-
-
 
 -(NSArray*)polylinesWithRoute:(AMapRoute*)route start:(AMapGeoPoint *)start end:(AMapGeoPoint *)end
 {
