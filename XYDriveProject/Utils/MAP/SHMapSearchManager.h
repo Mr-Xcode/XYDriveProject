@@ -13,6 +13,7 @@
 typedef void(^SHAMAPSearchManagerRouteSuccess)(NSArray *polylines);
 typedef void(^SHAMAPSearchManagerCitySuccess)(NSString *city,NSString *cityCode,NSString*formattedAddress);
 typedef void(^SHAMAPGeoSearchSuccess)(AMapGeocodeSearchResponse *response);
+typedef void(^SHaMapPoisSearchSuccess)(NSArray * pois);
 typedef void(^SHAMAPSearchManagerFailure)(NSString *error);
 
 
@@ -22,6 +23,7 @@ typedef void(^SHAMAPSearchManagerFailure)(NSString *error);
 @property (nonatomic,copy) SHAMAPSearchManagerCitySuccess cityBlock;
 @property (nonatomic,copy) SHAMAPSearchManagerFailure failureBlock;
 @property (nonatomic,copy) SHAMAPGeoSearchSuccess geoSuccess;
+@property (nonatomic,copy) SHaMapPoisSearchSuccess poisBlock;
 
 //反地理编码
 -(void)startSearchCityWithLatitude:(CGFloat)latitude  longitude:(CGFloat)longitude;
@@ -35,5 +37,8 @@ typedef void(^SHAMAPSearchManagerFailure)(NSString *error);
 
 //地理编码
 - (void)aMapGeocodeSearch:(NSString *)city block:(SHAMAPGeoSearchSuccess)block failure:(SHAMAPSearchManagerFailure)failure;
+
+//poi搜索
+- (void)searchGeoPoisWithLocation:(AMapGeoPoint *)center Kewords:(NSString *)kewords poisBlock:(SHaMapPoisSearchSuccess)block failure:(SHAMAPSearchManagerFailure)failure;
 
 @end

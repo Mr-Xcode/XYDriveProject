@@ -102,19 +102,48 @@
             failure(error);
         }
     };
-    
+}
+- (void)searchGeoPoisWithLocation:(AMapGeoPoint *)center Kewords:(NSString *)kewords poisBlock:(SHaMapPoisSearchSuccess)block failure:(SHAMAPSearchManagerFailure)failure{
     AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
     
-    request.location            = [AMapGeoPoint locationWithLatitude:39.990459 longitude:116.481476];
-    request.keywords            = @"电影院";
+    request.location            = [AMapGeoPoint locationWithLatitude:center.latitude longitude:center.longitude];
+    request.keywords            = kewords;
+    request.radius              = 1000;
     /* 按照距离排序. */
     request.sortrule            = 0;
     request.requireExtension    = YES;
+    [self.search AMapPOIAroundSearch:request];
+    self.poisBlock = ^(NSArray * pois) {
+        if (block) {
+            block(pois);
+        }
+    };
+   
 }
 #pragma mark - <AMapGeoDelegate>
 - (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response{
     if (self.geoSuccess) {
         self.geoSuccess(response);
+    }
+}
+/* POI 搜索回调. */
+- (void)onPOISearchDone:(AMapPOISearchBaseRequest *)request response:(AMapPOISearchResponse *)response
+{
+    if (response.pois.count == 0)
+    {
+        return;
+    }
+    
+    //解析response获取POI信息
+    NSMutableArray *poiAnnotations = [NSMutableArray arrayWithCapacity:response.pois.count];
+    
+    [response.pois enumerateObjectsUsingBlock:^(AMapPOI *obj, NSUInteger idx, BOOL *stop) {
+        
+        [poiAnnotations addObject:obj];
+        
+    }];
+    if (self.poisBlock) {
+        self.poisBlock(poiAnnotations);
     }
 }
 -(void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
