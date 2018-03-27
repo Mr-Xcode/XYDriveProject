@@ -18,6 +18,11 @@ typedef void(^SHAMAPSearchManagerFailure)(NSString *error);
 
 @interface SHMapSearchManager : NSObject
 
+@property (nonatomic,copy) SHAMAPSearchManagerRouteSuccess routeBlock;
+@property (nonatomic,copy) SHAMAPSearchManagerCitySuccess cityBlock;
+@property (nonatomic,copy) SHAMAPSearchManagerFailure failureBlock;
+@property (nonatomic,copy) SHAMAPGeoSearchSuccess geoSuccess;
+
 //反地理编码
 -(void)startSearchCityWithLatitude:(CGFloat)latitude  longitude:(CGFloat)longitude;
 

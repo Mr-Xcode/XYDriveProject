@@ -10,6 +10,8 @@
 #define kDisplayProvince 0
 #define kDisplayCity 1
 #define kDisplayArea 2
+
+typedef void(^SelCityBlock)(NSDictionary * dic);
 @interface AddressViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -20,4 +22,6 @@
 @property(nonatomic,strong)NSString *selectedProvince;//选中的省
 @property(nonatomic,strong)NSString *selectedCity;//选中的市
 @property(nonatomic,strong)NSString *selectedArea;//选中的区
+
+@property (nonatomic, copy)SelCityBlock cityBlock;
 @end

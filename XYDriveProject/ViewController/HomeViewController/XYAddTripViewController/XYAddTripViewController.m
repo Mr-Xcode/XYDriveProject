@@ -62,6 +62,8 @@
 @property (nonatomic, strong)NSMutableArray * markersArray;
 @property (nonatomic, strong)NSMutableArray * roads;
 
+@property (nonatomic, copy)NSString * objId;
+
 @end
 
 @implementation XYAddTripViewController
@@ -76,21 +78,6 @@
     return _dateSelView;
 }
 #pragma mark - MAP
-//- (AMapReGeocodeSearchRequest *)regeo {
-//    if (!_regeo) {
-//        _regeo = [[AMapReGeocodeSearchRequest alloc]init];
-//        _regeo.requireExtension = YES;
-//    }
-//    return _regeo;
-//}
-//
-//- (AMapSearchAPI *)search {
-//    if (!_search) {
-//        _search = [[AMapSearchAPI alloc]init];
-//        _search.delegate = self;
-//    }
-//    return _search;
-//}
 - (AMapLocationManager *)locationManager {
     if (!_locationManager) {
         _locationManager = [[AMapLocationManager alloc]init];
@@ -106,13 +93,6 @@
         __weak typeof(_xyMapView) weakMapView =_xyMapView;
         WeakSelf;
         self.searchManager.routeBlock = ^(NSArray *polylines) {
-//            if (weakSelf.lineOverlay) {
-//                [weakMapView removeOverlay:weakSelf.lineOverlay];
-//                weakSelf.lineOverlay=nil;
-//            }
-//            weakSelf.tempOverlay=nil;
-            
-//            weakSelf.lineOverlay=polylines.firstObject;
             [weakSelf addLineRouteWithOverlay:polylines.firstObject];
         };
         self.searchManager.cityBlock = ^(NSString *city, NSString *cityCode, NSString *formattedAddress) {
@@ -156,17 +136,6 @@
         }
         self.myLat =location.coordinate.latitude;
         self.myLng =location.coordinate.longitude;
-//        [self addDriveLine:self.tripRoadIndex];
-//        DLog(@"当前位置:%f",location.coordinate.latitude);
-//        //添加大头针
-//        _annotation = [[MAPointAnnotation alloc]init];
-//
-//        _annotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-//        [mapView addAnnotation:_annotation];
-//        [mapView setCenterCoordinate:CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude) animated:YES];
-//        //让地图在缩放过程中移到当前位置试图
-//        [mapView setZoomLevel:16.1 animated:YES];
-
     }];
     
 }
@@ -193,19 +162,6 @@
 }
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation
 {
-//    if ([annotation isKindOfClass:[MAPointAnnotation class]] && ![annotation isKindOfClass:[MAUserLocation class]])
-//    {
-//        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
-//        MAPinAnnotationView*annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
-//        if (annotationView == nil)
-//        {
-//            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
-//        }
-//        //放一张大头针图片即可
-//        annotationView.image = [UIImage imageNamed:@"icon_location"];
-//        annotationView.centerOffset = CGPointMake(0, -15);
-//        return annotationView;
-//    }
     
     if ([annotation isKindOfClass:[XYCustomAnnotation class]])
     {
@@ -237,6 +193,9 @@
 }
 //长按地图添加标注
 - (void)mapView:(MAMapView *)mapView didLongPressedAtCoordinate:(CLLocationCoordinate2D)coordinate{
+    MACoordinateRegion re = mapView.region;
+    
+    CLLocationCoordinate2D coordinateTest =CLLocationCoordinate2DMake(re.span.latitudeDelta, re.span.longitudeDelta);
     [self.searchManager startSearchCityWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude AnnotationType:isAdd];
 }
@@ -251,9 +210,6 @@
 }
 #pragma mark - 滑动地图结束修改当前位置
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    
-//    self.regeo.location = [AMapGeoPoint locationWithLatitude:mapView.centerCoordinate.latitude longitude:mapView.centerCoordinate.longitude];
-//    [self.search AMapReGoecodeSearch:self.regeo];
 }
 #pragma mark - ViewDidLoad
 - (void)viewDidLoad {
@@ -265,24 +221,10 @@
     self.roads =[NSMutableArray array];
     self.routeIndicatorInfoArray = [NSMutableArray array];
     self.markersArray =[NSMutableArray array];
-//    [self.view addSubview:self.dateSelView];
-//    self.animationController = [[CalenderAnimationController alloc] init];
     [self addMapView];
-//    [self initDriveManager];
-//    [self initRouteIndicatorView];
-//    self.centerImageView =[[UIImageView alloc]init];
-//    self.centerImageView.frame =CGRectMake(0, 0, 30, 30);
-//    self.centerImageView.image =[UIImage imageNamed:@"icon_location"];
-//    self.centerImageView.center =self.view.center;
-//    self.centerImageView.centerY -=44;
-//    [self.view addSubview:self.centerImageView];
-//    [self.view bringSubviewToFront:self.centerImageView];
-//    [self jumpAnimation:self.centerImageView];
     [self getTripPoints];
     
     [self setItemsBtnTitles:@[@"上一站",@"下一站"] images:@[@"",@""] action:^(UIButton *button) {
-//        SetTripRoudeViewController * setVC =[[SetTripRoudeViewController alloc]init];
-//        [self.navigationController pushViewController:setVC animated:YES];
         if (button.tag==201) {
             //item1
         }else if (button.tag ==202){
@@ -291,6 +233,7 @@
     }];
 }
 - (void)getTripPoints{
+    self.objId =self.tirpObj.objectId;
     NSArray * markers = self.tirpObj[@"markers"];
     if (!ICIsObjectEmpty(markers)) {
         for (NSDictionary * dic in markers) {

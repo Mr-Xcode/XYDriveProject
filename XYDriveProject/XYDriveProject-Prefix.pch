@@ -34,5 +34,6 @@
 #import "UIToast.h"
 #import "UILoading.h"
 #import "NSString+LSExtension.h"
+#import "XYLeancloudManager.h"
 //#endif
 #endif /* XYDriveProject_Prefix_pch */

@@ -90,6 +90,7 @@
         cityVC.displayType = kDisplayCity;//显示模式为城市
         cityVC.citys = citys;
         cityVC.selectedProvince = self.selectedProvince;
+        cityVC.cityBlock = self.cityBlock;
         [self.navigationController pushViewController:cityVC animated:YES];
     }else if (self.displayType == kDisplayCity){
         NSDictionary *city = self.citys[indexPath.row];
@@ -101,6 +102,7 @@
         areaVC.areas = areas;
         areaVC.selectedCity = self.selectedCity;
         areaVC.selectedProvince = self.selectedProvince;
+        areaVC.cityBlock = self.cityBlock;
         [self.navigationController pushViewController:areaVC animated:YES];
     }
     else{
@@ -117,9 +119,17 @@
     
 }
 -(void)submit{
-    NSString *msg = [NSString stringWithFormat:@"%@-%@-%@",self.selectedProvince,self.selectedCity,self.selectedArea];
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择地址" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
-    [alert show];
+//    NSString *msg = [NSString stringWithFormat:@"%@-%@-%@",self.selectedProvince,self.selectedCity,self.selectedArea];
+    NSMutableDictionary * dic =[NSMutableDictionary dictionary];
+    dic[@"Province"] =self.selectedProvince;
+    dic[@"City"] =self.selectedCity;
+    dic[@"Area"] =self.selectedArea;
+    if (self.cityBlock) {
+        self.cityBlock(dic);
+    }
+    [self cancel];
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"选择地址" message:msg delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+//    [alert show];
 }
 
 -(void)cancel{

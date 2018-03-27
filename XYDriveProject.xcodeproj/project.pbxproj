@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230402B62069E7620063664B /* XYLeancloudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 230402B52069E7620063664B /* XYLeancloudManager.m */; };
 		2322B8B1204B9C910095DA01 /* SHMapSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2322B8B0204B9C910095DA01 /* SHMapSearchManager.m */; };
 		2322B8BC204B9D2C0095DA01 /* MANaviAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2322B8B3204B9D2B0095DA01 /* MANaviAnnotation.m */; };
 		2322B8BD204B9D2C0095DA01 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 2322B8B4204B9D2B0095DA01 /* CommonUtility.m */; };
@@ -105,6 +106,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		230402B42069E7620063664B /* XYLeancloudManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XYLeancloudManager.h; sourceTree = "<group>"; };
+		230402B52069E7620063664B /* XYLeancloudManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYLeancloudManager.m; sourceTree = "<group>"; };
 		2322B8AF204B9C910095DA01 /* SHMapSearchManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHMapSearchManager.h; sourceTree = "<group>"; };
 		2322B8B0204B9C910095DA01 /* SHMapSearchManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHMapSearchManager.m; sourceTree = "<group>"; };
 		2322B8B2204B9D2B0095DA01 /* LineDashPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineDashPolyline.h; sourceTree = "<group>"; };
@@ -310,6 +313,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		230402B32069E7270063664B /* RequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				230402B42069E7620063664B /* XYLeancloudManager.h */,
+				230402B52069E7620063664B /* XYLeancloudManager.m */,
+			);
+			path = RequestManager;
+			sourceTree = "<group>";
+		};
 		2322B8AE204B9C600095DA01 /* MAP */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +374,7 @@
 			children = (
 				234692AD202193DB007DE6F4 /* AppDelegate.h */,
 				234692AE202193DB007DE6F4 /* AppDelegate.m */,
+				230402B32069E7270063664B /* RequestManager */,
 				234692EC2022E488007DE6F4 /* Framework */,
 				234692E12022E2C4007DE6F4 /* Macros */,
 				234692DF2022E2C3007DE6F4 /* Model */,
@@ -1226,6 +1239,7 @@
 				23A36E0F202832F000F1C730 /* WriteLog.m in Sources */,
 				23A36EDD202ACA7B00F1C730 /* HttpManager.m in Sources */,
 				234692FD2022E619007DE6F4 /* XYHomeViewController.m in Sources */,
+				230402B62069E7620063664B /* XYLeancloudManager.m in Sources */,
 				2322B8BD204B9D2C0095DA01 /* CommonUtility.m in Sources */,
 				23B6B70D2063870600C76CA0 /* NSString+LSExtension.m in Sources */,
 				2322B8BF204B9D2C0095DA01 /* MANaviPolyline.m in Sources */,

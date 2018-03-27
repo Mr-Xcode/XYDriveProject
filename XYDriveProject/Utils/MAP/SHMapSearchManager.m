@@ -25,11 +25,6 @@
 @property (nonatomic,strong) AMapRouteSearchBaseRequest *lastRequest;
 
 @property (nonatomic, strong) NSMutableArray * polylines;
-
-@property (nonatomic,copy) SHAMAPSearchManagerRouteSuccess routeBlock;
-@property (nonatomic,copy) SHAMAPSearchManagerCitySuccess cityBlock;
-@property (nonatomic,copy) SHAMAPSearchManagerFailure failureBlock;
-@property (nonatomic,copy) SHAMAPGeoSearchSuccess geoSuccess;
 @end
 
 @implementation SHMapSearchManager
@@ -107,6 +102,14 @@
             failure(error);
         }
     };
+    
+    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
+    
+    request.location            = [AMapGeoPoint locationWithLatitude:39.990459 longitude:116.481476];
+    request.keywords            = @"电影院";
+    /* 按照距离排序. */
+    request.sortrule            = 0;
+    request.requireExtension    = YES;
 }
 #pragma mark - <AMapGeoDelegate>
 - (void)onGeocodeSearchDone:(AMapGeocodeSearchRequest *)request response:(AMapGeocodeSearchResponse *)response{
