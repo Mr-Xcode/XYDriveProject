@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <JTCalendar/JTCalendar.h>
 
+typedef void(^SelectDateBlcok)(NSDate * date,NSString * dateStr);
+
 @interface XYDateSlecteView : UIView
 @property (strong, nonatomic) JTCalendarManager *calendarManager;
+@property (nonatomic, copy) SelectDateBlcok seleDateBlock;
 - (void)toNextDay;
 @end
