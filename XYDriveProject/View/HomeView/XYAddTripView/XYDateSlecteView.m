@@ -67,6 +67,9 @@
     [_calendarManager setMenuView:self.calendarMenuView];
     [_calendarManager setContentView:self.calendarContentView];
     [_calendarManager setDate:[NSDate date]];
+    if (self.seleDateBlock) {
+        self.seleDateBlock([NSDate date],[[self dateFormatter] stringFromDate:[NSDate date]]);
+    }
 }
 - (void)toNextDay{
     NSDate* newDate =  [_calendarManager.date dateByAddingTimeInterval:60*60*24];
@@ -117,7 +120,9 @@
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(JTCalendarDayView *)dayView
 {
     _dateSelected = dayView.date;
-    
+    if (self.seleDateBlock) {
+        self.seleDateBlock(_dateSelected,[[self dateFormatter] stringFromDate:_dateSelected]);
+    }
     // Animation for the circleView
     dayView.circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1);
     [UIView transitionWithView:dayView
@@ -181,7 +186,7 @@
     static NSDateFormatter *dateFormatter;
     if(!dateFormatter){
         dateFormatter = [NSDateFormatter new];
-        dateFormatter.dateFormat = @"dd-MM-yyyy";
+        dateFormatter.dateFormat = @"yyyy-MM-dd";
     }
     
     return dateFormatter;

@@ -85,6 +85,8 @@
 		23C0614B204CE69700F6153E /* XYCustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C0614A204CE69700F6153E /* XYCustomCalloutView.m */; };
 		23C0614E204CE7C300F6153E /* XYCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C0614D204CE7C300F6153E /* XYCustomAnnotationView.m */; };
 		23C06152204CEB5800F6153E /* AnnotatationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C06151204CEB5800F6153E /* AnnotatationModel.m */; };
+		23E1C65B207B9C150024FDC9 /* TimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E1C659207B9C150024FDC9 /* TimeTableViewCell.m */; };
+		23E1C65C207B9C150024FDC9 /* TimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23E1C65A207B9C150024FDC9 /* TimeTableViewCell.xib */; };
 		90B191FE9959BD2E10617364 /* libPods-XYDriveProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD13F5B4DEE4522118B31B2 /* libPods-XYDriveProject.a */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +264,9 @@
 		23C0614D204CE7C300F6153E /* XYCustomAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XYCustomAnnotationView.m; sourceTree = "<group>"; };
 		23C06150204CEB5800F6153E /* AnnotatationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnotatationModel.h; sourceTree = "<group>"; };
 		23C06151204CEB5800F6153E /* AnnotatationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnotatationModel.m; sourceTree = "<group>"; };
+		23E1C658207B9C150024FDC9 /* TimeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeTableViewCell.h; sourceTree = "<group>"; };
+		23E1C659207B9C150024FDC9 /* TimeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeTableViewCell.m; sourceTree = "<group>"; };
+		23E1C65A207B9C150024FDC9 /* TimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeTableViewCell.xib; sourceTree = "<group>"; };
 		4CD13F5B4DEE4522118B31B2 /* libPods-XYDriveProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XYDriveProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7464420354746FF02EC6A6F4 /* Pods-XYDriveProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XYDriveProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XYDriveProject/Pods-XYDriveProject.debug.xcconfig"; sourceTree = "<group>"; };
 		E8181A7627636965E417FE1B /* Pods-XYDriveProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XYDriveProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-XYDriveProject/Pods-XYDriveProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -943,6 +948,9 @@
 				237DF4302053CAF70016459E /* FloatingView.m */,
 				239B11572068D63A0071C4AA /* XYScrollView.h */,
 				239B11582068D63A0071C4AA /* XYScrollView.m */,
+				23E1C658207B9C150024FDC9 /* TimeTableViewCell.h */,
+				23E1C659207B9C150024FDC9 /* TimeTableViewCell.m */,
+				23E1C65A207B9C150024FDC9 /* TimeTableViewCell.xib */,
 			);
 			path = XYAddTripView;
 			sourceTree = "<group>";
@@ -1131,6 +1139,7 @@
 				238BB26120493D690072F2C3 /* AddNameAlertView.xib in Resources */,
 				234692BA202193DB007DE6F4 /* LaunchScreen.storyboard in Resources */,
 				239B1150206892CE0071C4AA /* XYSearchPlaceViewController.xib in Resources */,
+				23E1C65C207B9C150024FDC9 /* TimeTableViewCell.xib in Resources */,
 				234692B7202193DB007DE6F4 /* Assets.xcassets in Resources */,
 				234692B5202193DB007DE6F4 /* Main.storyboard in Resources */,
 				234693032022FAB7007DE6F4 /* XYLoginViewController.xib in Resources */,
@@ -1232,6 +1241,7 @@
 				2322B8BE204B9D2C0095DA01 /* LineDashPolyline.m in Sources */,
 				2350039A204FCD3A00DC02EF /* MoreMenuView.m in Sources */,
 				23A36EFD202C3B9400F1C730 /* XYUserModel.m in Sources */,
+				23E1C65B207B9C150024FDC9 /* TimeTableViewCell.m in Sources */,
 				23A36E0A202830B300F1C730 /* SHButton.m in Sources */,
 				23500393204FCA3700DC02EF /* RouteCollectionViewCell.m in Sources */,
 				23A36E2820284E7300F1C730 /* XYMenuView.m in Sources */,

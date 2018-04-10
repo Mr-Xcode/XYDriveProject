@@ -8,8 +8,9 @@
 
 #import "XYTimeTripView.h"
 #import "XYDateSlecteView.h"
+#import "TimeTableViewCell.h"
 
-@interface XYTimeTripView ()<UIGestureRecognizerDelegate,UIScrollViewDelegate>
+@interface XYTimeTripView ()<UIGestureRecognizerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UIView *gridView;
 @property (strong, nonatomic) UIView *bcView;
 @property (nonatomic, assign) CGFloat pressViewWidth;
@@ -21,6 +22,10 @@
 @property (nonatomic, strong) NSDate * startDate;
 @property (nonatomic, strong) NSDate * endDate;
 @property (nonatomic,strong) NSArray * markers;
+@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, weak)UILabel * headTimeLable;
+
+@property (nonatomic, strong)UITableView * timeTableView;
 /**
  *  保存可见的视图
  */
@@ -63,7 +68,10 @@
     self.addViews =[NSMutableArray array];
     [self addSubview:self.dateSelView];
     [self addSubview:self.topTapView];
-    [self setupScrollView];
+//    [self setupScrollView];
+    self.date =self.dateSelView.calendarManager.date;
+    [self addSubview:self.timeTableView];
+    
 //    UIScrollView * scrollV =[[UIScrollView alloc]init];
 //    scrollV.frame =CGRectMake(0, CGRectGetMaxY(self.dateSelView.frame), SCREEN_W, self.bounds.size.height-self.dateSelView.bounds.size.height-TOPGestureViewH);
 //    scrollV.bounces =NO;
@@ -110,12 +118,17 @@
 }
 - (XYDateSlecteView *)dateSelView{
     if (!_dateSelView) {
+        WeakSelf;
         self.dateSelView =[[XYDateSlecteView alloc]initWithFrame:CGRectMake(0,TOPGestureViewH, SCREEN_W, 135)];
 //        CGFloat r = RND_COLOR;
 //        CGFloat g = RND_COLOR;
 //        CGFloat b = RND_COLOR;
 //        self.dateSelView.backgroundColor =[UIColor colorWithRed:r green:g blue:b alpha:1];
         self.dateSelView.backgroundColor =[UIColor whiteColor];
+        self.dateSelView.seleDateBlock = ^(NSDate *date,NSString * dateStr) {
+//            weakSelf.date =date;
+            weakSelf.headTimeLable.text =dateStr;
+        };
     }
     return _dateSelView;
 }
@@ -332,5 +345,82 @@
     snapshot.layer.shadowRadius = 5.0;
     snapshot.layer.shadowOpacity = 0.4;
     return snapshot;
+}
+#pragma mark - <TableView>
+- (UITableView *)timeTableView{
+    if (!_timeTableView) {
+        self.timeTableView =[[UITableView alloc]initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
+        self.timeTableView.frame= CGRectMake(0,CGRectGetMaxY(self.dateSelView.frame), SCREEN_W, self.bounds.size.height-self.dateSelView.bounds.size.height-TOPGestureViewH);
+        self.timeTableView.delegate =self;
+        self.timeTableView.dataSource =self;
+        self.timeTableView.estimatedRowHeight = 60;
+        self.timeTableView.separatorStyle =UITableViewCellSeparatorStyleNone;
+        [self.timeTableView registerNib:[UINib nibWithNibName:@"TimeTableViewCell" bundle:nil] forCellReuseIdentifier:@"cell"];
+        self.timeTableView.estimatedSectionFooterHeight=0;
+        self.timeTableView.estimatedSectionHeaderHeight=0;
+    }
+    return _timeTableView;
+}
+#pragma mark - TableView Delegate
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 10;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * identifier =@"cell";
+    TimeTableViewCell *cell=(TimeTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell =[[TimeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 76;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section ==0) {
+        return 37;
+    }
+    return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    //    if (section==(self.dataList.count-1)) {
+    //        return 10;
+    //    }
+    return CGFLOAT_MIN;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section ==0) {
+        
+        UIView * view =[[UIView alloc]init];
+        view.frame =CGRectMake(0, 0, self.bounds.size.width, 37);
+        view.backgroundColor =[UIColor whiteColor];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *strDate = [dateFormatter stringFromDate:self.date];
+        
+        UILabel * label1=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, view.bounds.size.width, 35)];
+        
+        label1.font =TextFont_14;
+        label1.textColor =[UIColor whiteColor];
+        label1.text=[NSString stringWithFormat:@"    %@",strDate];
+        
+        label1.backgroundColor=[UIColor blackColor];
+        self.headTimeLable =label1;
+        [view addSubview:label1];
+        
+        return view ;
+    }
+    return nil;
+    
 }
 @end
