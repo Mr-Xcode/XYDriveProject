@@ -45,10 +45,12 @@
 }
 - (void)saveRequest{
 //    NSMutableArray *markers = [NSMutableArray array];
-    
+    [UILoading showMessage:@"加载中……"];
     AVObject *todo = [AVObject objectWithClassName:SqlRoadbook objectId:self.model.objId];
     NSMutableDictionary * attributes =[NSMutableDictionary new];
-    attributes[@"address"] =@"哈哈哈哈哈哈，果然是";
+    attributes[@"address"] =self.model.attributes.address;
+    attributes[@"lat"] =self.model.attributes.lat;
+    attributes[@"lng"] =self.model.attributes.lng;
     
     NSMutableDictionary * dic =[NSMutableDictionary new];
     dic[@"attributes"] =attributes;
@@ -59,11 +61,14 @@
     [todo addObject:dic forKey:@"markers"];
     
     [todo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        [UILoading hide];
                 if (succeeded) {
                     // 存储成功
+                    [self.navigationController popViewControllerAnimated:YES];
                     DLog(@"%@",todo.objectId);// 保存成功之后，objectId 会自动从云端加载到本
                 }else{
                     DLog(@"提交失败！");
+                    [UIToast showMessage:@"提交失败"];
                 }
             }];
     

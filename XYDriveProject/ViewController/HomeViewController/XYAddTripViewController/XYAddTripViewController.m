@@ -102,6 +102,8 @@
             Markers * markmodel =[[Markers alloc]init];
             Attributes * attribute =[[Attributes alloc]init];
             attribute.address =formattedAddress;
+            attribute.lat =StringFromDouble(weakSelf.lpointLat);
+            attribute.lng =StringFromDouble(weakSelf.lpointLng);
             markmodel.attributes =attribute;
             markmodel.objId =weakSelf.objId;
             markmodel.title =city;
