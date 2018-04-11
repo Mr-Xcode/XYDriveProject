@@ -12,5 +12,6 @@
 @interface SetTripRoudeViewController : XYBaseViewController
 //@property (nonatomic, strong) AnnotatationModel * model;
 @property (nonatomic, strong) Markers * model;
+@property (nonatomic, copy) NSString * objId;
 
 @end

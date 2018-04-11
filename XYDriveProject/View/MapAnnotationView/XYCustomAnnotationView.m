@@ -52,8 +52,8 @@
         }
         
         self.calloutView.image = [UIImage imageNamed:@"building"];
-        self.calloutView.title = self.annotation.title;
-        self.calloutView.subtitle = self.annotation.subtitle;
+        self.calloutView.title = self.model.title;
+        self.calloutView.subtitle = self.model.attributes.address;
         self.calloutView.model =self.model;
         
         [self addSubview:self.calloutView];

@@ -23,6 +23,7 @@
 @property (nonatomic, copy)NSString * title;
 @property (nonatomic, copy)NSString * start;
 @property (nonatomic, copy)NSString * end;
+@property (nonatomic, copy)NSString * objId;
 
 @end
 

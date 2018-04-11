@@ -12,7 +12,7 @@
 #pragma mark - <查询获取对象>
 + (void)requestGetObject:(NSString *)className objId:(NSString *)objId Success:(RequestSuccesslock)successBlock Failure:(RequestFailure)failureBlock{
     AVQuery *query = [AVQuery queryWithClassName:className];
-    [UILoading showMessage:@"刷新中……"];
+    [UILoading showMessage:@"加载中……"];
     [query getObjectInBackgroundWithId:objId block:^(AVObject *object, NSError *error) {
         [UILoading hide];
         // object 就是 id 为 558e20cbe4b060308e3eb36c 的 Todo 对象实例
@@ -29,7 +29,7 @@
 }
 #pragma mark - <添加构建对象>
 + (void)requestAddObjectClassName:(NSString *)className parames:(id)parames Success:(RequestSuccesslock)successBlock Failure:(RequestFailure)failureBlock{
-    [UILoading showMessage:@"刷新中……"];
+    [UILoading showMessage:@"加载中……"];
     NSMutableDictionary * paramsDic =[NSMutableDictionary dictionaryWithDictionary:parames];
     AVObject * todo = [[AVObject alloc] initWithClassName:className];// 构建对象
     NSArray *keys = [paramsDic allKeys];

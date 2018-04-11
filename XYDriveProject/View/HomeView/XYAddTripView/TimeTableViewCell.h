@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TimeTableViewCell : UITableViewCell
+@property (nonatomic, strong) Markers * model;
 
 @end

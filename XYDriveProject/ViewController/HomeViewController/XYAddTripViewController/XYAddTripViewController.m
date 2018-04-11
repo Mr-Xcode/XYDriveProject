@@ -46,6 +46,9 @@
 @property (nonatomic, assign) CGFloat myLat;
 @property (nonatomic, assign) CGFloat myLng;
 
+@property (nonatomic, assign) CGFloat lpointLat;
+@property (nonatomic, assign) CGFloat lpointLng;
+
 @property (nonatomic, assign) int tripRoadIndex;
 @property (nonatomic, strong) UICollectionView *routeIndicatorView;
 @property (nonatomic, strong) NSMutableArray *routeIndicatorInfoArray;
@@ -90,18 +93,20 @@
 - (SHMapSearchManager *)searchManager{
     if (!_searchManager) {
         self.searchManager =[[SHMapSearchManager alloc]init];
-        __weak typeof(_xyMapView) weakMapView =_xyMapView;
+//        __weak typeof(_xyMapView) weakMapView =_xyMapView;
         WeakSelf;
         self.searchManager.routeBlock = ^(NSArray *polylines) {
             [weakSelf addLineRouteWithOverlay:polylines.firstObject];
         };
         self.searchManager.cityBlock = ^(NSString *city, NSString *cityCode, NSString *formattedAddress) {
             Markers * markmodel =[[Markers alloc]init];
-            weakSelf.addAnnotation.title =city;
-            weakSelf.addAnnotation.subtitle =formattedAddress;
-            markmodel.title =formattedAddress;
-            weakSelf.addAnnotation.model =markmodel;
-            [weakMapView addAnnotation:weakSelf.addAnnotation];
+            Attributes * attribute =[[Attributes alloc]init];
+            attribute.address =formattedAddress;
+            markmodel.attributes =attribute;
+            markmodel.objId =weakSelf.objId;
+            markmodel.title =city;
+            markmodel.attributes =attribute;
+            [weakSelf addAnntationViewLat:weakSelf.lpointLat Lng:weakSelf.lpointLng AnnotationType:isAdd model:markmodel];
         };
     }
     return _searchManager;
@@ -147,14 +152,18 @@
         self.driveManager.delegate =self;
     }
 }
-- (void)addAnntationViewLat:(CGFloat)lat Lng:(CGFloat)lng AnnotationType:(AnnotationType)type{
-    self.addAnnotation =nil;
+- (void)addAnntationViewLat:(CGFloat)lat Lng:(CGFloat)lng AnnotationType:(AnnotationType)type model:(Markers *)model{
+    if (self.addAnnotation) {
+        [self.xyMapView removeAnnotation:self.addAnnotation];
+    }
     XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
     pointAnnotation.coordinate = CLLocationCoordinate2DMake(lat, lng);
-    pointAnnotation.title = @"";
-    pointAnnotation.subtitle = @"";
+    pointAnnotation.title = model.title;
+    pointAnnotation.subtitle = model.attributes.address;
+    pointAnnotation.model =model;
     pointAnnotation.anType =type;
     self.addAnnotation =pointAnnotation;
+    [self.xyMapView addAnnotation:self.addAnnotation];
 }
 #pragma mark - MAP delegate
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
@@ -165,7 +174,6 @@
     
     if ([annotation isKindOfClass:[XYCustomAnnotation class]])
     {
-        XYCustomAnnotation * xyAnnotation =(XYCustomAnnotation *)annotation;
         static NSString *reuseIndetifier = @"annotationReuseIndetifier";
         XYCustomAnnotationView *annotationView = (XYCustomAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
         if (annotationView == nil)
@@ -173,18 +181,18 @@
             annotationView = [[XYCustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseIndetifier];
         }
         annotationView.image = [UIImage imageNamed:@"icon_location"];
-        
+        XYCustomAnnotation * xyAnnotation =(XYCustomAnnotation *)annotation;
         if (xyAnnotation.anType ==isAdd) {
             // 设置为NO，用以调用自定义的calloutView
-            annotationView.canShowCallout = NO;
+            annotationView.canShowCallout = YES;
+            Markers * mo =xyAnnotation.model;
+            annotationView.model =mo;
             annotationView.selected =YES;
         }else{
             // 设置为NO，用以调用自定义的calloutView
             annotationView.canShowCallout = YES;
-            annotationView.enabled =NO;
+            annotationView.enabled =YES;
         }
-        annotationView.model =xyAnnotation.model;
-        
         // 设置中心点偏移，使得标注底部中间点成为经纬度对应点
         annotationView.centerOffset = CGPointMake(0, -18);
         return annotationView;
@@ -196,8 +204,11 @@
     MACoordinateRegion re = mapView.region;
     
     CLLocationCoordinate2D coordinateTest =CLLocationCoordinate2DMake(re.span.latitudeDelta, re.span.longitudeDelta);
+    self.lpointLat =coordinate.latitude;
+    self.lpointLng =coordinate.longitude;
     [self.searchManager startSearchCityWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude AnnotationType:isAdd];
+    
+//    [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude AnnotationType:isAdd];
 }
 #pragma mark - 让大头针不跟着地图滑动，时时显示在地图最中间
 - (void)mapViewRegionChanged:(MAMapView *)mapView {
@@ -238,6 +249,7 @@
     if (!ICIsObjectEmpty(markers)) {
         for (NSDictionary * dic in markers) {
             Markers * marker =[Markers mj_objectWithKeyValues:dic];
+            marker.objId =self.objId;
             NSLog(@"%@,%@",marker.attributes.city,marker.title);
             [self.markersArray addObject:marker];
             XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];

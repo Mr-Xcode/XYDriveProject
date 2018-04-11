@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *endBtn;
 @property (weak, nonatomic) IBOutlet UITextView *describeTextView;
 @property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (nonatomic, assign)BOOL isStartTime;
 
 @end
 
@@ -25,18 +26,47 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.isStartTime =YES;
     self.title =@"添加行程";
-    [self setItemsBtnTitles:@[@"搜索",@"确认"] images:@[@"",@""] action:^(UIButton *button) {
+    WeakSelf;
+    [self setItemsBtnTitles:@[@"",@"保存"] images:@[@"",@""] action:^(UIButton *button) {
         if (button.tag==201) {
             //item1
+            [weakSelf saveRequest];
         }else if (button.tag ==202){
             //item2
+            [weakSelf saveRequest];
         }
     }];
     
-    self.titleLable.text =self.model.title;
+    self.titleLable.text =self.model.attributes.address;
     [self.startBtn setTitle:self.model.start forState:UIControlStateNormal];
     [self.endBtn setTitle:self.model.end forState:UIControlStateNormal];
+}
+- (void)saveRequest{
+//    NSMutableArray *markers = [NSMutableArray array];
+    
+    AVObject *todo = [AVObject objectWithClassName:SqlRoadbook objectId:self.model.objId];
+    NSMutableDictionary * attributes =[NSMutableDictionary new];
+    attributes[@"address"] =@"哈哈哈哈哈哈，果然是";
+    
+    NSMutableDictionary * dic =[NSMutableDictionary new];
+    dic[@"attributes"] =attributes;
+    dic[@"title"] =self.titleLable.text;
+    dic[@"start"] =self.startBtn.titleLabel.text;
+    dic[@"end"] =self.endBtn.titleLabel.text;
+    
+    [todo addObject:dic forKey:@"markers"];
+    
+    [todo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    // 存储成功
+                    DLog(@"%@",todo.objectId);// 保存成功之后，objectId 会自动从云端加载到本
+                }else{
+                    DLog(@"提交失败！");
+                }
+            }];
+    
 }
 - (IBAction)searchButtonClick:(id)sender {
     XYSearchPlaceViewController * searchVC =[[XYSearchPlaceViewController alloc]init];
@@ -47,9 +77,11 @@
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 - (IBAction)startBtnClick:(id)sender {
+    self.isStartTime =YES;
     [self showTimeAlert];
 }
 - (IBAction)endBtnClick:(id)sender {
+    self.isStartTime =NO;
     [self showTimeAlert];
 }
 - (void)showTimeAlert{
@@ -65,6 +97,11 @@
     NSDate * date =[NSDate setYear:dateComponents.year month:dateComponents.month day:dateComponents.day hour:dateComponents.hour minute:dateComponents.minute];
     NSString * string =[self dateFormattingWithDate:date toFormate:@"YYYY-MM-dd HH:mm"];
     NSLog(@"date = %@", string);
+    if (self.isStartTime) {
+        [self.startBtn setTitle:string forState:UIControlStateNormal];
+    }else{
+        [self.endBtn setTitle:string forState:UIControlStateNormal];
+    }
 //    [self.goTimeButton setTitle:string forState:UIControlStateNormal];
 //    self.selTimeStr =string;
     
