@@ -73,6 +73,9 @@
         if (error) {
             return ;
         }
+        
+        self.center.latitude =location.coordinate.latitude;
+        self.center.longitude =location.coordinate.longitude;
         [self.cityButton setTitle:[NSString stringWithFormat:@"%@",regeocode.city] forState:UIControlStateNormal];
     }];
 }

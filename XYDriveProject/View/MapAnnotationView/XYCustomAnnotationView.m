@@ -8,7 +8,7 @@
 
 #import "XYCustomAnnotationView.h"
 #import "XYCustomAnnotation.h"
-#define kCalloutWidth       200.0
+#define kCalloutWidth       240.0
 #define kCalloutHeight      70.0
 @interface XYCustomAnnotationView ()
 

@@ -12,7 +12,7 @@
 #define kPortraitWidth      70
 #define kPortraitHeight     50
 
-#define kTitleWidth         120
+#define kTitleWidth         160
 #define kTitleHeight        20
 
 #define kArrorHeight        10

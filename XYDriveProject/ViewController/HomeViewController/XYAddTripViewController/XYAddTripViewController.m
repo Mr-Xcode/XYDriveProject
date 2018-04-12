@@ -212,6 +212,11 @@
     
 //    [self addAnntationViewLat:coordinate.latitude Lng:coordinate.longitude AnnotationType:isAdd];
 }
+- (void)mapView:(MAMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate{
+    if (self.addAnnotation) {
+        [self.xyMapView removeAnnotation:self.addAnnotation];
+    }
+}
 #pragma mark - 让大头针不跟着地图滑动，时时显示在地图最中间
 - (void)mapViewRegionChanged:(MAMapView *)mapView {
     _annotation.coordinate = mapView.centerCoordinate;

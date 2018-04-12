@@ -33,7 +33,7 @@
     if (self.displayType == kDisplayProvince) { //只在选择省份页面显示取消按钮
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     }
-    if (self.displayType == kDisplayCity) {//只在选择区域页面显示确定按钮
+    if (self.displayType == kDisplayArea) {//只在选择区域页面显示确定按钮
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
     }
     CGRect frame = [self.view bounds];

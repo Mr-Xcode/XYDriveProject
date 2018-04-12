@@ -108,7 +108,7 @@
     
     request.location            = [AMapGeoPoint locationWithLatitude:center.latitude longitude:center.longitude];
     request.keywords            = kewords;
-    request.radius              = 1000;
+    request.radius              = 2000;
     /* 按照距离排序. */
     request.sortrule            = 0;
     request.requireExtension    = YES;
