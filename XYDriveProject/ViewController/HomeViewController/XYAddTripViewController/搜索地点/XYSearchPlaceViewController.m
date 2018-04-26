@@ -27,6 +27,7 @@
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 @property (nonatomic, copy)NSString * selCity;
 @property (nonatomic, strong)AMapGeoPoint * center;
+@property (nonatomic, strong) Markers * model;
 @end
 
 @implementation XYSearchPlaceViewController
@@ -49,6 +50,18 @@
     // Do any additional setup after loading the view from its nib.
     self.title =@"搜索位置";
     [self addMapView];
+    
+     self.navigationItem.rightBarButtonItem =[[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItemAdd) target:self action:@selector(add)];
+}
+- (void)add{
+    if (ICIsObjectEmpty(self.model)) {
+        [UIToast showMessage:@"请选择要添加的地点"];
+        return;
+    }
+    if (self.adddelegate && [self.adddelegate respondsToSelector:@selector(addPoint:)]) {
+        [self.adddelegate addPoint:self.model];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)addMapView{
     MAMapView * mapView = [[MAMapView alloc] init];
@@ -97,11 +110,22 @@
     }
     return nil;
 }
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view{
+    MAPointAnnotation *pointAnnotation=(MAPointAnnotation *)view.annotation;
+    self.model =[[Markers alloc]init];
+    self.model.title =pointAnnotation.title;
+    Attributes * attribute =[[Attributes alloc]init];
+    attribute.address =pointAnnotation.subtitle;
+    attribute.city =self.selCity;
+    attribute.lat =StringFromDouble(pointAnnotation.coordinate.latitude);
+    attribute.lng =StringFromDouble(pointAnnotation.coordinate.longitude);
+    self.model.attributes =attribute;
+}
 - (IBAction)cityButtonClick:(id)sender {
     AddressViewController * cityVC =[[AddressViewController alloc]init];
     WeakSelf;
     cityVC.cityBlock = ^(NSDictionary *dic) {
-        weakSelf.selCity =[NSString stringWithFormat:@"%@%@%@",dic[@"Province"],dic[@"City"],dic[@"Area"]];
+        weakSelf.selCity =[NSString stringWithFormat:@"%@",dic[@"City"]];//dic[@"Province"],dic[@"Area"]
         [weakSelf.cityButton setTitle:weakSelf.selCity forState:UIControlStateNormal];
         [weakSelf locationCityCenter];
     };

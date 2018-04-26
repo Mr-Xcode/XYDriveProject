@@ -33,9 +33,12 @@
     if (self.displayType == kDisplayProvince) { //只在选择省份页面显示取消按钮
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     }
-    if (self.displayType == kDisplayArea) {//只在选择区域页面显示确定按钮
+    if (self.displayType == kDisplayCity) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
     }
+//    if (self.displayType == kDisplayArea) {//只在选择区域页面显示确定按钮
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(submit)];
+//    }
     CGRect frame = [self.view bounds];
     self.tableView = [[UITableView alloc]initWithFrame:frame];
     self.tableView.delegate = self;
@@ -103,7 +106,7 @@
         areaVC.selectedCity = self.selectedCity;
         areaVC.selectedProvince = self.selectedProvince;
         areaVC.cityBlock = self.cityBlock;
-        [self.navigationController pushViewController:areaVC animated:YES];
+//        [self.navigationController pushViewController:areaVC animated:YES];
     }
     else{
         //取消上一次选定状态
@@ -123,7 +126,7 @@
     NSMutableDictionary * dic =[NSMutableDictionary dictionary];
     dic[@"Province"] =self.selectedProvince;
     dic[@"City"] =self.selectedCity;
-    dic[@"Area"] =self.selectedArea;
+//    dic[@"Area"] =self.selectedArea;
     if (self.cityBlock) {
         self.cityBlock(dic);
     }

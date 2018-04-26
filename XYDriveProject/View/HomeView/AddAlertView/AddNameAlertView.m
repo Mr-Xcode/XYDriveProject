@@ -61,39 +61,19 @@
     parames[@"name"] = self.tripNameField.text;
     parames[@"startDate"] = self.selTimeStr;
     parames[@"userId"] = currentUser.objectId;
+    parames[@"creater"] =currentUser.username;
+    parames[@"markers"] =nil;
+    parames[@"routes"] =nil;
     [XYLeancloudManager requestAddObjectClassName:SqlRoadbook parames:parames Success:^(AVObject *obj) {
+        [obj setObject:obj.objectId forKey:@"id"];
+        [obj save];
         if (self.addBlcok) {
             self.addBlcok(obj);
         }
         [self hideTargetView];
     } Failure:^(NSError *error) {
-        
+
     }];
-    
-    
-    
-    
-    
-    
-    
-    
-//    AVObject * todo = [[AVObject alloc] initWithClassName:SqlRoadbook];// 构建对象
-//    [todo setObject:self.tripNameField.text forKey:@"name"];// 设置名称
-//    [todo setObject:self.selTimeStr forKey:@"startDate"];// 设置时间
-//    [todo setObject:currentUser.objectId forKey:@"userId"];
-//    [todo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-//        if (succeeded) {
-//            // 存储成功
-//            DLog(@"%@",todo.objectId);// 保存成功之后，objectId 会自动从云端加载到本
-//            if (self.addBlcok) {
-//                self.addBlcok(todo);
-//            }
-//             [self hideTargetView];
-//        }else{
-//            DLog(@"提交失败！");
-//        }
-//    }];
-    
 }
 #pragma mark - <UITextFiledDelegate>
 - (void)textFieldDidEndEditing:(UITextField *)textField{

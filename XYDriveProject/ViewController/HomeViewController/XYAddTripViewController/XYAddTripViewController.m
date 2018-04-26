@@ -145,6 +145,13 @@
         self.myLng =location.coordinate.longitude;
     }];
     
+    UIButton * addButton =[UIButton buttonWithType:UIButtonTypeCustom];
+    addButton.frame =CGRectMake(30, 50, 100, 44);
+    addButton.backgroundColor =[UIColor blackColor];
+    [addButton setTitle:@"添加" forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(addViaPoint) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:addButton];
+    
 }
 - (void)initDriveManager
 {
@@ -258,6 +265,9 @@
             Markers * marker =[Markers mj_objectWithKeyValues:dic];
             marker.objId =self.objId;
             NSLog(@"%@,%@",marker.attributes.city,marker.title);
+            if (ICIsStringEmpty(marker.attributes.lat) || ICIsStringEmpty(marker.attributes.lat)) {
+                continue;
+            }
             [self.markersArray addObject:marker];
             XYCustomAnnotation *pointAnnotation = [[XYCustomAnnotation alloc] init];
             CLLocationCoordinate2D coor=CLLocationCoordinate2DMake([marker.attributes.lat doubleValue], [marker.attributes.lng doubleValue]);
@@ -268,6 +278,7 @@
             [self.markersAnnotationArray addObject:pointAnnotation];
             
             pointAnnotation.model =marker;
+            
             //把所有景点的坐标存起来
             AMapGeoPoint * roadPoint = [AMapGeoPoint locationWithLatitude:coor.latitude longitude:coor.longitude];
             [self.roads addObject:roadPoint];
@@ -282,8 +293,7 @@
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"添加" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"OK Action");
-            SetTripRoudeViewController * setVC =[[SetTripRoudeViewController alloc]init];
-            [self.navigationController pushViewController:setVC animated:YES];
+            [self addViaPoint];
         }];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"让我想想" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"Cancel Action");
@@ -294,6 +304,12 @@
         [self presentViewController:alertController animated:YES completion:nil];
     }
     
+}
+#pragma mark - <跳转添加途经点>
+- (void)addViaPoint{
+    SetTripRoudeViewController * setVC =[[SetTripRoudeViewController alloc]init];
+    setVC.tripObject =self.tirpObj;
+    [self.navigationController pushViewController:setVC animated:YES];
 }
 - (void)initRouteIndicatorView
 {

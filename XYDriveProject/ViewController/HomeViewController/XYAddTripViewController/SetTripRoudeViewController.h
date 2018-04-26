@@ -13,5 +13,6 @@
 //@property (nonatomic, strong) AnnotatationModel * model;
 @property (nonatomic, strong) Markers * model;
 @property (nonatomic, copy) NSString * objId;
+@property (nonatomic, strong)AVObject * tripObject;
 
 @end

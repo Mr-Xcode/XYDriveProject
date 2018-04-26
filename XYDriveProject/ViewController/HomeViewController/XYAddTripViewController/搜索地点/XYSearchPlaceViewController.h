@@ -8,6 +8,11 @@
 
 #import "XYBaseViewController.h"
 
+@protocol XYAddDelegate <NSObject>
+- (void)addPoint:(Markers *)model;
+@end
+
 @interface XYSearchPlaceViewController : XYBaseViewController
+@property (nonatomic, weak)id<XYAddDelegate>adddelegate;
 
 @end

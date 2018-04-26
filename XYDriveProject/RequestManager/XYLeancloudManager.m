@@ -34,7 +34,8 @@
     AVObject * todo = [[AVObject alloc] initWithClassName:className];// 构建对象
     NSArray *keys = [paramsDic allKeys];
     for (NSString * key in keys) {
-        [todo setObject:paramsDic[@"key"] forKey:key];
+        [todo setObject:paramsDic[key] forKey:key];
+        DLog(@"key =%@,value =%@",key,paramsDic[@"key"]);
     }
     [todo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         [UILoading hide];
